@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html>
+<head>
+
+    <title>Notepad</title>
+    <link rel="stylesheet" href="index.css">
+    <script src="index.js"></script>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+</head>
+
+<body>
+
+
+    <div id="loginContainer">
+        <div id= "loginTitle">Login</div><div id="signupbtn" onclick="signUpForm()">Sign up</div>
+        <form id="login" action="/login">
+        <label for ="username">Username</label>
+        <input id ="username" name="username" type="text"><br><br>
+        <label for ="password">Password</label>
+        <input id ="password" name ="password" type="password"><br>
+        <div id="loginTextResponce">Welcome Back!</div>
+        </form>
+        <div id="submitbtn">Submit</div>
+        </div>
+        
+        <div id="signUpContainer">
+        <div id= "signUpTitle">Sign Up</div><div id="loginbtn" onclick="loginForm()">Login</div>
+        <form id="signUp" action ="/sign_up" method="POST">
+        <label for ="newUsername">Username</label>
+        <input id ="newUsername" type="text" name="newUsername"><br><br>
+        <label for ="newPassword">Password</label>
+        <input id ="newPassword" type="password" name="newPassword"><br>
+        <div id="signUpTextResponce">Welcome!</div>
+        <button id="submitbtn0">Submit</button>
+        </form>
+        
+        </div>
+        
+        <script>
+        
+        function signUpForm(){
+        document.getElementById("loginContainer").style.display ="none";
+        document.getElementById("signUpContainer").style.display ="block";
+        }
+        
+        function loginForm(){
+        document.getElementById("loginContainer").style.display ="block";
+        document.getElementById("signUpContainer").style.display ="none";
+        }
+        
+        /*function signUpTextResponce(){
+        document.getElementById("signUpTextResponce").style.display ="block";
+        }
+        
+        function loginTextResponce(){
+        document.getElementById("loginTextResponce").style.display ="block";
+        }*/
+        </script>
+
+</body>
+</html>

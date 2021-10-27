@@ -1,0 +1,75 @@
+#loginContainer{
+    border: 1px solid rgb(0, 0, 0);
+    border-radius: 10px;
+    height: 200px;
+    width: 400px;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 15%;
+    display: none;
+    }
+    
+    #signUpContainer{
+    border: 1px solid rgb(0, 0, 0);
+    border-radius: 10px;
+    height: 200px;
+    width: 400px;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 15%;
+    display: block;
+    }
+    
+    #loginTitle, #signUpTitle{
+    text-align: center;
+    font-size: 150%;
+    font-weight: bold;
+    margin-top: 1%;
+    }
+    
+    #login, #signUp{
+    margin-left: 20%;
+    margin-top: 10%;
+    }
+    
+    #submitbtn, #submitbtn0{
+    border: 1px solid rgb(0, 0, 0);
+    border-radius: 15px;
+    padding: 1%;
+    width: fit-content;
+    float: right;
+    margin-right: 2%;
+    margin-top: 7%;
+    cursor: pointer;
+    }
+    
+    #username,#password, #newUsername, #newPassword{
+    border-radius: 4px;
+    }
+    
+    #signupbtn {
+    border: 1px solid rgb(0, 0, 0);
+    border-radius: 15px;
+    padding: 1%;
+    width: fit-content;
+    margin-top: -7%;
+    transform: translate(560%,16%);
+    cursor: pointer;
+    }
+    
+    #loginbtn {
+    border: 1px solid rgb(0, 0, 0);
+    border-radius: 15px;
+    padding: 1%;
+    width: fit-content;
+    margin-top: -7%;
+    transform: translate(710%,16%);
+    cursor: pointer;
+    }
+    
+    #signUpTextResponce, #loginTextResponce{
+    text-align:center;
+    transform: translate(-10%,200%);
+    margin-bottom: -6%;
+    display: none;
+    }
