@@ -2,10 +2,10 @@ const express = require('express');
 const cors = require('cors');
 const mongoose = require('mongoose');
 const morgan = require('morgan');
-const passport = require('passport');
-const LocalStrategy = require("passport-local");
-const passportLocalMongoose =
-        require("passport-local-mongoose");
+// const passport = require('passport');
+// const LocalStrategy = require("passport-local");
+// const passportLocalMongoose =
+//         require("passport-local-mongoose");
 
 require('dotenv').config();//configures .env file
 
@@ -17,7 +17,7 @@ const port = process.env.PORT || 5000;//define server port
 app.use(cors());
 app.use(express.json());//enables parsing of json
 app.use(morgan('short'));
-app.use(express.static('./public'));
+app.use(express.static('./public'));//displays static pages
 
 app.use(express.urlencoded({ extended: false }));
 
