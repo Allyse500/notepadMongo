@@ -68,13 +68,14 @@ const isAuth = (req, res, next) => {
 
 //require the user model needed-----------
 let User = require('./models/user.model');//require the user model needed
+let Notes = require('./models/notes.model');//require the notes model needed
 
 //sign up function================================================================
 app.post("/sign_up", async (req,res) => {
     const username = req.body.newUsername;//username inserted to form
     const password = req.body.newPassword;//password inserted to form
 
-    let user = await User.findOne({username});
+    let user = await User.findOne({username});//check user collection for username
 
     if (user){//if username already exists
         console.log("user already exists.");
@@ -97,7 +98,7 @@ app.post("/login", async (req,res)=>{
     const username = req.body.username;//username inserted to form
     const password = req.body.password;//password inserted to form
 
-    let user = await User.findOne({username});
+    let user = await User.findOne({username});//check user collection for username
 
     if (!user){//if the user does not exsist, return to the home page
         console.log("not a user");
@@ -112,23 +113,43 @@ app.post("/login", async (req,res)=>{
 
     }
     req.session.isAuth = true;
+    req.session.username = username;
     res.render("notes");
 })
 
-//route code that submits new user to mongodb, overlap enabled
-// let User = require('./models/user.model');//require the user model needed
-// app.post('/sign_up', (req,res) => {
-//     console.log("Trying to make a new user");
+//submit notes to database, sucessfully updates or inserts new note to DB===============================================
+app.post("/submit_notes",async (req,res)=>{
 
-//     const username = req.body.newUsername;//username inserted to form
-//     const password = req.body.newPassword;//password inserted to form
+var sessionuser = req.session.username;
+var textnotes = req.body.notes;
+console.log(sessionuser);
+let notes = await Notes.findOne({sessionuser});//check user collection for username
 
-//     const newUser = new User({username, password});//make new user with field info
+if (notes){//if notes already exist***place for update
+    console.log("notes already exist.");
+    //note new text and current session user as for entry-------------
+    notes.username = sessionuser;
+    notes.notes = textnotes;
 
-//     newUser.save()//submit to database
-//         .then(() => res.redirect("/"))
-//         .catch(err => res.status(400).json('Error: ' + err));
-// })
+    await notes.save();//save updated notes to DB
+    return res.render("notes");//stay on notes page
+}
+else{//if notes do not yet exist, prepare notes document
+
+    //encryption of notes is good but not in this method
+    //const hashedPW = await bcrypt.hash(password, 10);//hash password with salt of 10 times encryption
+    notes = new Notes({
+        username: sessionuser,
+        notes: textnotes
+    })
+
+    await notes.save();//save new notes to DB
+    res.render('notes');//stay on notes page
+}
+
+})
+
+
 
 app.post("/logout", (req,res)=>{
     req.session.destroy((err)=>{
@@ -141,16 +162,28 @@ app.post("/logout", (req,res)=>{
     res.redirect("/");
 })
 
-app.get("/", (req,res) =>{
-    //res.send("Hello from Root");
-    res.redirect("/");
-})
+// app.get("/", (req,res) =>{
+//     //res.send("Hello from Root");
+//     res.redirect("/");
+// })
 
-app.get("/notes", isAuth,  (req,res)=>{
-    res.render("notes");
+app.get("/notes", isAuth,  async (req,res)=>{
+    //res.render("notes");
     console.log("reached notes page");
     console.log("is Auth: " + req.session.isAuth);
-    
+
+var sessionuser = req.session.username;
+//var textnotes = req.body.notes;
+    console.log(sessionuser);
+let notes = await Notes.findOne({sessionuser});//check user collection for username
+
+if (notes){//if notes already exist***place for update
+    console.log("notes already exist: " + notes.notes);
+    //call back notes submitted to database-------------
+    res.render("notes.ejs", {notes = notes.notes});
+}
+
+    res.end();
 })
 
 //starts server==========================================

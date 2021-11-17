@@ -3,7 +3,7 @@
 <body>
 <head>
     <title>Notepad</title>
-    <link href="/public/notes/notes.css" rel="stylesheet" type="text/css"><!--does not render noting MIME type not defined-->
+    <link href="notes.css" rel="stylesheet" type="text/css"><!--does not render noting MIME type not defined-->
     <style>
        /* #notes{
     border: solid 1px rgb (0, 0, 0);
@@ -35,10 +35,10 @@
 <form class = "logoutBtn" action ="/logout" method="POST">
     <button>Logout</button>
 </form>
-<form>
+<form action ="/submit_notes" method ="POST">
 <h1 id="noteTitle">Notes</h1>
-<textarea id = "notes" cols= "25" rows = "20"></textarea><br>
-<input id="noteSubmit" type="button" value="submit">
+<textarea id = "notes" cols= "25" rows = "20" name="notes"></textarea><br>
+<button id="noteSubmit">Submit</button>
 </form>
 
 </body>
