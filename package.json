@@ -1,22 +1,22 @@
 {
-  "name": "notepad",
+  "name": "notepadMongo",
   "version": "1.0.0",
   "description": "",
-  "main": "index.js",
+  "main": "server.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "node server.js"
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/Allyse500/notepad.git"
+    "url": "git+https://github.com/Allyse500/notepadMongo.git"
   },
   "author": "",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/Allyse500/notepad/issues"
+    "url": "https://github.com/Allyse500/notepadMongo/issues"
   },
-  "homepage": "https://github.com/Allyse500/notepad#readme",
+  "homepage": "https://github.com/Allyse500/notepadMongo#readme",
   "dependencies": {
     "bcrypt": "^5.0.1",
     "connect-mongodb-session": "^3.1.1",
