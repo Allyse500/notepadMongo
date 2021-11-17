@@ -179,7 +179,6 @@ if (notes){//if notes already exist***place for update
     //call back notes submitted to database-------------
     res.render("notes.ejs", {notes: notes.notes});
 }
-
     res.end();
 })
 
