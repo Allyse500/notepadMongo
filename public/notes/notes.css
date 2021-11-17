@@ -11,9 +11,13 @@
     
     #noteSubmit{
     float: right;
-    margin-right: 30%;
+    margin-right: 40%;
     }
     
     #noteTitle{
     text-align: center;
+    }
+    
+    .logoutBtn{
+    margin-left: 65%;
     }

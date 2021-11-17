@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+<body>
+<head>
+    <title>Notepad</title>
+    <link href="/public/notes/notes.css" rel="stylesheet" type="text/css"><!--does not render noting MIME type not defined-->
+    <style>
+       /* #notes{
+    border: solid 1px rgb (0, 0, 0);
+    border-radius: 10px;
+    margin-left: auto;
+    margin-right: auto;
+    display: block;
+    margin-top: 2%;
+    resize: none;
+    padding: 2%;
+    }
+    
+    #noteSubmit{
+    float: right;
+    margin-right: 40%;
+    }
+    
+    #noteTitle{
+    text-align: center;
+    }
+    
+    .logoutBtn{
+    margin-left: 65%;
+    }*/
+    </style>
+    <script src="notes.js"></script>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+</head>
+<form class = "logoutBtn" action ="/logout" method="POST">
+    <button>Logout</button>
+</form>
+<form>
+<h1 id="noteTitle">Notes</h1>
+<textarea id = "notes" cols= "25" rows = "20"></textarea><br>
+<input id="noteSubmit" type="button" value="submit">
+</form>
+
+</body>
+</html>
