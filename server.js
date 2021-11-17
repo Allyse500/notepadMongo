@@ -110,11 +110,10 @@ app.post("/login", async (req,res)=>{
     if(!isMatch){//if the password doesn't match, return user to home page
         console.log("not matched");
         return res.redirect("/");
-
     }
     req.session.isAuth = true;
     req.session.username = username;
-    res.render("notes");
+    res.redirect("/notes");
 })
 
 //submit notes to database, sucessfully updates or inserts new note to DB===============================================
@@ -132,7 +131,7 @@ if (notes){//if notes already exist***place for update
     notes.notes = textnotes;
 
     await notes.save();//save updated notes to DB
-    return res.render("notes");//stay on notes page
+    return res.redirect("/notes");//stay on notes page
 }
 else{//if notes do not yet exist, prepare notes document
 
@@ -144,12 +143,10 @@ else{//if notes do not yet exist, prepare notes document
     })
 
     await notes.save();//save new notes to DB
-    res.render('notes');//stay on notes page
+    res.redirect("/notes");//stay on notes page
 }
 
 })
-
-
 
 app.post("/logout", (req,res)=>{
     req.session.destroy((err)=>{
@@ -169,11 +166,11 @@ app.post("/logout", (req,res)=>{
 
 app.get("/notes", isAuth,  async (req,res)=>{
     //res.render("notes");
-    console.log("reached notes page");
-    console.log("is Auth: " + req.session.isAuth);
+    // console.log("reached notes page");
+    // console.log("is Auth: " + req.session.isAuth);
 
-var sessionuser = req.session.username;
-//var textnotes = req.body.notes;
+var sessionuser = req.session.username;//session user's name
+
     console.log(sessionuser);
 let notes = await Notes.findOne({sessionuser});//check user collection for username
 
