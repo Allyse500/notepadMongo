@@ -180,7 +180,7 @@ let notes = await Notes.findOne({sessionuser});//check user collection for usern
 if (notes){//if notes already exist***place for update
     console.log("notes already exist: " + notes.notes);
     //call back notes submitted to database-------------
-    res.render("notes.ejs", {notes = notes.notes});
+    res.render("notes.ejs", {notes: notes.notes});
 }
 
     res.end();
