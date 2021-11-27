@@ -701,9 +701,14 @@ if (uploadOpt !== "block"){
 }
 else if (uploadOpt == "block"){
     document.getElementById("uploadInputTag").style.display = "none";
+    document.getElementById("uploadInputTag").value = "";
+    document.getElementById("uploadedPhoto").style.display = "none";
+    document.getElementById("uploadedPhoto").src = "#";
+
 }
 else if (uploadOpt == "none"){
     document.getElementById("uploadInputTag").style.display = "block";
+    document.getElementById("uploadedPhoto").style.display = "block";
 }
 }//end of uploadOpt0
 
