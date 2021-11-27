@@ -4,7 +4,12 @@
 <head>
     <title>Notepad</title>
     <link href="notes.css" rel="stylesheet" type="html/css"><!--does not render noting MIME type not defined-->
-    <style>
+    <!-- <link class="jsbin" href="http://ajax.googleapis.com/ajax/libs/jqueryui/1/themes/base/jquery-ui.css" rel="stylesheet" type="text/css" /> -->
+    <script class="jsbin" src="http://ajax.googleapis.com/ajax/libs/jquery/1/jquery.min.js">
+    </script>
+    <script class="jsbin" src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8.0/jquery-ui.min.js"></script>
+    
+<style>
     
 body {
   background-image: url('../public/flower.jpg');
@@ -270,7 +275,7 @@ display: none;
 #flowerPhoto{
 height: 60px;
 width: 100px;
-background-image: url('flower.jpg');
+background-image: url('../public/flower.jpg');
 background-size: 110px 62px;
 background-repeat: no-repeat;
 border: 1px solid black;
@@ -288,7 +293,7 @@ border: 1px solid black;
 #bridgePhoto{
 height: 60px;
 width: 100px;
-background-image: url('bridge.jpg');
+background-image: url('../public/bridge.jpg');
 background-size: 110px 62px;
 background-repeat: no-repeat;
 border: 1px solid black;
@@ -498,8 +503,8 @@ margin-left: 2%;
         </div><!--end of bridge class="photoOptGrid"-->
         <br>
         <input type="checkbox" id="uploadOpt" name="uploadOpt" onclick="uploadOpt0()"><label for="uploadOpt">Upload</label><br>
-        <input type="file" id="uploadInputTag" name="uploadInputTag" onchange="style3(this)">
-        <div id="uploadedPhoto"></div>
+        <input type="file" id="uploadInputTag" name="uploadInputTag" onchange="style3(this);">
+        <img id="uploadedPhoto" src="#" alt="your image">
         <br>
         </div><!--end of id="bpOptContent"-->
 <!--Text option-------------------------------------------------------------------------------->
@@ -638,7 +643,7 @@ var check1 = document.getElementById("flowerInputTag").checked;
 var check2 = document.getElementById("bridgeInputTag").checked;
 
 if (check1 == true) {
-document.getElementById("bodyID").style.backgroundImage = "url('flower.jpg')";
+document.getElementById("bodyID").style.backgroundImage = "url('../public/flower.jpg')";
 document.getElementById("bridgeInputTag").checked = false;
 }
 else if((check1 == false && check2 == false) == true) {
@@ -652,7 +657,7 @@ var check1 = document.getElementById("flowerInputTag").checked;
 var check2 = document.getElementById("bridgeInputTag").checked;
 
 if (check2 == true) {
-document.getElementById("bodyID").style.backgroundImage = "url('bridge.jpg')";
+document.getElementById("bodyID").style.backgroundImage = "url('../public/bridge.jpg')";
 document.getElementById("flowerInputTag").checked = false;
 }
 else if((check1 == false && check2 == false) == true) {
@@ -704,21 +709,20 @@ else if (uploadOpt == "none"){
 
 //function to upload photo of uploaded image-----------
 function style3(input){
-    var image = document.getElementById("uploadInputTag").value;
-    document.getElementById("uploadedPhoto").style.backgroundImage = "url('"+ image + "')";
+    if (input.files && input.files[0]) {
+            var reader = new FileReader();
 
-    // if (input.files && input.files[0]) {
-    //         var reader = new FileReader();
+            reader.onload = function (e) {
+                $('#uploadedPhoto')
+                    .attr('src', e.target.result)
+                    .width(100)
+                    .height(60);
+                //insert photo to background
+                document.getElementById("bodyID").style.backgroundImage= "url('" + e.target.result + "')";
+            };
 
-    //         reader.onload = function (e) {
-    //             document.getElementById("uploadedPhoto")
-    //                 .attr('src', e.target.result)
-    //                 .width(150)
-    //                 .height(200);
-    //         };
-
-    //         reader.readAsDataURL(input.files[0]);
-    //     }
+            reader.readAsDataURL(input.files[0]);
+        }        
 }
 
 //submit all text color choices-----------------
