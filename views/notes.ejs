@@ -2,9 +2,14 @@
 <html>
 
 <head>
-    <title>Journal</title>
+    <title>Notepad</title>
     <link href="notes.css" rel="stylesheet" type="html/css"><!--does not render noting MIME type not defined-->
-    <style>
+    <!-- <link class="jsbin" href="http://ajax.googleapis.com/ajax/libs/jqueryui/1/themes/base/jquery-ui.css" rel="stylesheet" type="text/css" /> -->
+    <script class="jsbin" src="http://ajax.googleapis.com/ajax/libs/jquery/1/jquery.min.js">
+    </script>
+    <script class="jsbin" src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8.0/jquery-ui.min.js"></script>
+    
+<style>
     
 body {
   background-image: url('flower.jpg');
@@ -498,8 +503,8 @@ margin-left: 2%;
         </div><!--end of bridge class="photoOptGrid"-->
         <br>
         <input type="checkbox" id="uploadOpt" name="uploadOpt" onclick="uploadOpt0()"><label for="uploadOpt">Upload</label><br>
-        <input type="file" id="uploadInputTag" name="uploadInputTag" onchange="style3(this)">
-        <div id="uploadedPhoto"></div>
+        <input type="file" id="uploadInputTag" name="uploadInputTag" onchange="style3(this);">
+        <img id="uploadedPhoto" src="#" alt="your image">
         <br>
         </div><!--end of id="bpOptContent"-->
 <!--Text option-------------------------------------------------------------------------------->
@@ -529,7 +534,7 @@ margin-left: 2%;
 <div id="eidtAcctTitle">Edit Account</div>
 
 <form action="/editUsername" method="POST" class="editUsernamePasswordGrid">
-<div>username: </div><div id="currentUserName">Kim</div><input id="editedusername" name="editedusername" class="userInput"><div id="editusernamebtn" onclick="editusername()">Edit</div><button id="saveUsernameBtn">Save</button>
+<div>username: </div><div id="currentUserName"><%= name %></div><input id="editedusername" name="editedusername" class="userInput"><div id="editusernamebtn" onclick="editusername()">Edit</div><button id="saveUsernameBtn">Save</button>
 </form><!--end of username class="editUsernamePasswordGrid"-->
 <form id ="editPassowrdForm" action="/editPassword" method="POST">
 <div class="editUsernamePasswordGrid">
@@ -636,12 +641,18 @@ document.getElementById("bgOptTextContent").style.display = "block";
 function style1() {
 var check1 = document.getElementById("flowerInputTag").checked;
 var check2 = document.getElementById("bridgeInputTag").checked;
+var check3 = document.getElementById("uploadOpt").checked;
 
 if (check1 == true) {
 document.getElementById("bodyID").style.backgroundImage = "url('flower.jpg')";
 document.getElementById("bridgeInputTag").checked = false;
+document.getElementById("uploadOpt").checked = false;
+document.getElementById("uploadInputTag").style.display = "none";
+document.getElementById("uploadInputTag").value = "";
+document.getElementById("uploadedPhoto").style.display = "none";
+document.getElementById("uploadedPhoto").src = "#";
 }
-else if((check1 == false && check2 == false) == true) {
+else if((check1 == false && check2 == false && check3 == false) == true) {
 document.getElementById("bodyID").style.backgroundImage = "none";
 }
 
@@ -650,12 +661,18 @@ document.getElementById("bodyID").style.backgroundImage = "none";
 function style2() {
 var check1 = document.getElementById("flowerInputTag").checked;
 var check2 = document.getElementById("bridgeInputTag").checked;
+var check3 = document.getElementById("uploadOpt").checked
 
 if (check2 == true) {
 document.getElementById("bodyID").style.backgroundImage = "url('bridge.jpg')";
 document.getElementById("flowerInputTag").checked = false;
+document.getElementById("uploadOpt").checked = false;
+document.getElementById("uploadInputTag").style.display = "none";
+document.getElementById("uploadInputTag").value = "";
+document.getElementById("uploadedPhoto").style.display = "none";
+document.getElementById("uploadedPhoto").src = "#";
 }
-else if((check1 == false && check2 == false) == true) {
+else if((check1 == false && check2 == false && check3 == false) == true) {
 document.getElementById("bodyID").style.backgroundImage = "none";
 }
 
@@ -687,7 +704,9 @@ function bridgePhotoRemoveHiglight(){
 
 //open upload file option------------------
 function uploadOpt0(){
-    var checked = document.getElementById("uploadOpt").checked;
+    var check1 = document.getElementById("flowerInputTag").checked;
+    var check2 = document.getElementById("bridgeInputTag").checked;
+    var check3 = document.getElementById("uploadOpt").checked
     var uploadOpt = document.getElementById("uploadInputTag").style.display;
 if (uploadOpt !== "block"){
     document.getElementById("uploadInputTag").style.display = "block";
@@ -696,29 +715,37 @@ if (uploadOpt !== "block"){
 }
 else if (uploadOpt == "block"){
     document.getElementById("uploadInputTag").style.display = "none";
+    document.getElementById("uploadInputTag").value = "";
+    document.getElementById("uploadedPhoto").style.display = "none";
+    document.getElementById("uploadedPhoto").src = "#";
+
 }
 else if (uploadOpt == "none"){
     document.getElementById("uploadInputTag").style.display = "block";
+    document.getElementById("uploadedPhoto").style.display = "block";
+}
+
+if((check1 == false && check2 == false && check3 == false) == true) {
+document.getElementById("bodyID").style.backgroundImage = "none";
 }
 }//end of uploadOpt0
 
 //function to upload photo of uploaded image-----------
 function style3(input){
-    var image = document.getElementById("uploadInputTag").value;
-    document.getElementById("uploadedPhoto").style.backgroundImage = "url('"+ image + "')";
+    if (input.files && input.files[0]) {
+            var reader = new FileReader();
 
-    // if (input.files && input.files[0]) {
-    //         var reader = new FileReader();
+            reader.onload = function (e) {
+                $('#uploadedPhoto')
+                    .attr('src', e.target.result)
+                    .width(100)
+                    .height(60);
+                //insert photo to background
+                document.getElementById("bodyID").style.backgroundImage= "url('" + e.target.result + "')";
+            };
 
-    //         reader.onload = function (e) {
-    //             document.getElementById("uploadedPhoto")
-    //                 .attr('src', e.target.result)
-    //                 .width(150)
-    //                 .height(200);
-    //         };
-
-    //         reader.readAsDataURL(input.files[0]);
-    //     }
+            reader.readAsDataURL(input.files[0]);
+        }        
 }
 
 //submit all text color choices-----------------

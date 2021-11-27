@@ -122,7 +122,7 @@ app.post("/submit_notes",async (req,res)=>{
 var sessionuser = req.session.username;
 var textnotes = req.body.notes;
 console.log(sessionuser);
-let notes = await Notes.findOne({sessionuser});//check user collection for username
+let notes = await Notes.findOne({sessionuser});//check notes collection for username
 
 if (notes){//if notes already exist***place for update
     console.log("notes already exist.");
@@ -148,6 +148,68 @@ else{//if notes do not yet exist, prepare notes document
 
 })
 
+//======================UPDATE ACCT INFORMATION===================================
+//======================UPDATE USERNAME===========================================
+// app.post("/editUsername",async (req,res)=>{//this froze the DB**,did update username in notes collection, include update for sessionuser's name
+
+//     var sessionuser = req.session.username;
+//     var editedUserName = req.body.editedusername;
+//     console.log(sessionuser);
+
+//     let user0 = await User.findOne({sessionuser});//check users collection for username
+//     let user = await Notes.findOne({sessionuser});//check notes collection for username
+//     let newUN = await User.findOne({editedUserName});
+//     let newUN0 = await Notes.findOne({editedUserName});
+//     if (user0 && !newUN0){//if username exists and new entered username not yet used, update username in user collection
+//         console.log("username located. new username not yet used");
+//         //note new text and current session user as for entry-------------
+//         user0.username = editedUserName;
+    
+//         await user0.save();//save updated username to DB  
+//     }
+
+//     if (user && !newUN){//if username exists and new entered username not yet used, update username in notes collection
+//         console.log("username located. new username not yet used");
+//         //note new text and current session user as for entry-------------
+//         user.username = editedUserName;
+    
+//         await user.save();//save updated username to DB   
+//     }
+
+//     return res.end();//stay on notes page
+//     })
+    
+//================UPDATE PASSWORD======================================
+// app.post("/editPassword", async (req,res)=>{
+//     const username = req.session.username;//name of user for current session
+//     const oldPW = req.body.oldPassword;//what the user entered to be the current DB passowrd for their acct
+//     const newPW = req.body.newPassword;//what the user entered for new passoword
+//     const confirmNewPW = req.body.reEnteredNewPWD;//what the user re-entered for new passoword
+
+//     let user = await User.findOne({username});//check user collection for username
+
+//     const isMatch = await bcrypt.compare(oldPW, user.password);//compares input password with hashed password
+
+//     if(!isMatch){//if the password doesn't match, do not submit, stay on user page
+//         console.log("not matched");
+//         return res.end();
+//     }
+//     else if (isMatch){//if the password does match, check for matching re-entered passwords
+//         if(newPW === confirmNewPW){//if re-entered passwords do match, submit new password to DB
+//             const hashedPW = await bcrypt.hash(confirmNewPW, 10);//hash password with salt of 10 times encryption
+//             user.password = hashedPW;
+//             await user.save();//save updated password to DB 
+//             return res.end();//stay on notes page
+//         }
+//         else{
+//             console.log("not matched");
+//             return res.end();//stay on notes page
+//         }
+//     }
+    
+// })
+
+//===============LOGOUT FUNCTION========================================
 app.post("/logout", (req,res)=>{
     req.session.destroy((err)=>{
         if(err){
@@ -164,6 +226,7 @@ app.post("/logout", (req,res)=>{
 //     res.redirect("/");
 // })
 
+//=====================WHAT TO DO WHEN '/NOTES' ROUTE IDENTIFIED====================
 app.get("/notes", isAuth,  async (req,res)=>{
     //res.render("notes");
     // console.log("reached notes page");
@@ -176,8 +239,10 @@ let notes = await Notes.findOne({sessionuser});//check user collection for usern
 
 if (notes){//if notes already exist***place for update
     console.log("notes already exist: " + notes.notes);
+    console.log("session username: " + sessionuser);
     //call back notes submitted to database-------------
-    res.render("notes.ejs", {notes: notes.notes});
+    res.render("notes.ejs", {notes: notes.notes, name: sessionuser});//{name: sessionuser},
+
 }
     res.end();
 })
