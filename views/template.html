@@ -641,12 +641,18 @@ document.getElementById("bgOptTextContent").style.display = "block";
 function style1() {
 var check1 = document.getElementById("flowerInputTag").checked;
 var check2 = document.getElementById("bridgeInputTag").checked;
+var check3 = document.getElementById("uploadOpt").checked;
 
 if (check1 == true) {
 document.getElementById("bodyID").style.backgroundImage = "url('../public/flower.jpg')";
 document.getElementById("bridgeInputTag").checked = false;
+document.getElementById("uploadOpt").checked = false;
+document.getElementById("uploadInputTag").style.display = "none";
+document.getElementById("uploadInputTag").value = "";
+document.getElementById("uploadedPhoto").style.display = "none";
+document.getElementById("uploadedPhoto").src = "#";
 }
-else if((check1 == false && check2 == false) == true) {
+else if((check1 == false && check2 == false && check3 == false) == true) {
 document.getElementById("bodyID").style.backgroundImage = "none";
 }
 
@@ -655,12 +661,18 @@ document.getElementById("bodyID").style.backgroundImage = "none";
 function style2() {
 var check1 = document.getElementById("flowerInputTag").checked;
 var check2 = document.getElementById("bridgeInputTag").checked;
+var check3 = document.getElementById("uploadOpt").checked
 
 if (check2 == true) {
 document.getElementById("bodyID").style.backgroundImage = "url('../public/bridge.jpg')";
 document.getElementById("flowerInputTag").checked = false;
+document.getElementById("uploadOpt").checked = false;
+document.getElementById("uploadInputTag").style.display = "none";
+document.getElementById("uploadInputTag").value = "";
+document.getElementById("uploadedPhoto").style.display = "none";
+document.getElementById("uploadedPhoto").src = "#";
 }
-else if((check1 == false && check2 == false) == true) {
+else if((check1 == false && check2 == false && check3 == false) == true) {
 document.getElementById("bodyID").style.backgroundImage = "none";
 }
 
@@ -692,7 +704,9 @@ function bridgePhotoRemoveHiglight(){
 
 //open upload file option------------------
 function uploadOpt0(){
-    var checked = document.getElementById("uploadOpt").checked;
+    var check1 = document.getElementById("flowerInputTag").checked;
+    var check2 = document.getElementById("bridgeInputTag").checked;
+    var check3 = document.getElementById("uploadOpt").checked
     var uploadOpt = document.getElementById("uploadInputTag").style.display;
 if (uploadOpt !== "block"){
     document.getElementById("uploadInputTag").style.display = "block";
@@ -709,6 +723,10 @@ else if (uploadOpt == "block"){
 else if (uploadOpt == "none"){
     document.getElementById("uploadInputTag").style.display = "block";
     document.getElementById("uploadedPhoto").style.display = "block";
+}
+
+if((check1 == false && check2 == false && check3 == false) == true) {
+document.getElementById("bodyID").style.backgroundImage = "none";
 }
 }//end of uploadOpt0
 
