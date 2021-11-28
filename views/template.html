@@ -140,7 +140,7 @@ body {
   display: none;
   position: fixed; 
   z-index: 1;
-  padding-top: 100px;
+  padding-top: 80px;
   left: 0;
   top: 0;
   width: 100%;
@@ -297,6 +297,11 @@ background-image: url('../public/bridge.jpg');
 background-size: 110px 62px;
 background-repeat: no-repeat;
 border: 1px solid black;
+}
+
+#uploadedPhoto{
+    margin-top: 1%;
+    margin-left: 15%;
 }
 
 .photoOptGrid{
@@ -660,6 +665,9 @@ document.getElementById("optionsModal").style.display = "none";
 function background(){
 document.getElementById("optionsModal").style.display = "none";
 document.getElementById("backgroundOptModal").style.display = "block";
+
+document.getElementById("bpOptContent").style.display ="none";//remove display of previously opened Background Option Photo Content Selection
+document.getElementById("bgOptTextContent").style.display="none";//remove display of previously opened Background Option Text Content Selection
 }
 
 //display edit account modal---------------
@@ -687,6 +695,7 @@ var optionDisplay = document.getElementById("bpOptContent").style.display;
 
 if(optionDisplay !== "block"){
 document.getElementById("bpOptContent").style.display = "block";
+document.getElementById("bgOptTextContent").style.display = "none";
 }
 else if (optionDisplay == "block"){
 document.getElementById("bpOptContent").style.display = "none";
@@ -702,6 +711,7 @@ var optionDisplay = document.getElementById("bgOptTextContent").style.display;
 
 if(optionDisplay !== "block"){
 document.getElementById("bgOptTextContent").style.display = "block";
+document.getElementById("bpOptContent").style.display = "none";
 }
 else if (optionDisplay == "block"){
 document.getElementById("bgOptTextContent").style.display = "none";
