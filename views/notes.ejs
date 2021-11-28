@@ -45,8 +45,8 @@ body {
   box-shadow: inset 0 0 5px grey;
 }
 /* ==================SCROLL BAR END========================= */
-    #notes{
-    /* border: solid 1px rgb (0, 0, 0); */
+#notes{
+    /* border: solid 1px rgb(0, 0, 0); */
     border-radius: 10px;
     margin-left: auto;
     margin-right: auto;
@@ -140,7 +140,7 @@ body {
   display: none;
   position: fixed; 
   z-index: 1;
-  padding-top: 100px;
+  padding-top: 80px;
   left: 0;
   top: 0;
   width: 100%;
@@ -299,6 +299,11 @@ background-repeat: no-repeat;
 border: 1px solid black;
 }
 
+#uploadedPhoto{
+    margin-top: 1%;
+    margin-left: 15%;
+}
+
 .photoOptGrid{
     display: grid;
     grid-template-columns: 10% 50%;
@@ -434,6 +439,55 @@ margin-left: 15%;
 margin-left: 2%;
 }
 
+/*------Edit Account Username Lower Half----------------*/
+#uNeditStatusMsg{
+padding-top: 4%;
+padding-bottom: 4%;
+}
+
+#editUNLowerHalf{
+display: none;
+}
+
+/*-------Edit Account: Delete Account--------------*/
+#orNote{
+padding-top: 4%;
+padding-bottom: 4%;
+text-align: center;
+font-weight: bold;
+color: white;
+font-family: Arial, Helvetica, sans-serif;
+}
+
+#deleteAcctGrid{
+display: grid;
+grid-template-columns: 10% 70%
+}
+
+#deleteAcctForm{
+display: grid;
+grid-template-columns: 60% 30%;
+grid-gap: 0 5%;
+}
+
+#deleteAcctBtn{
+cursor: pointer;
+    border-radius: 10px;
+    background-color: rgba(255, 255, 255, .8);
+    border: 2px double black;
+    width: 80%;
+}
+
+#deleteAcctBtn:hover{
+background-color: black;
+color: white;
+border-color: white;
+}
+
+#deleteMsgAndConfirmSect{
+display: none;
+}
+
     </style>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 </head>
@@ -525,39 +579,65 @@ margin-left: 2%;
 <!--EDIT ACCOUNT INFO PROMPT BOX====================================-->
 
 <div id="editAcctModal">
-<div id ="editAcctContainer">
+    <div id ="editAcctContainer">
+    
+    <div class="backgroundOptHeaderBtns">
+    <div id="editAcctBack" onclick="editAcctBack()">&larr;</div><div id="editAcctExit" onclick="editAcctExit()">x</div>
+    </div><!--end of class="backgroundOptHeaderBtns"-->
+    
+    <div id="eidtAcctTitle">Edit Account</div>
+    
+    <!--edit username section ----------------->
+    <form action="/editUsername" method="POST" >
+    <div class="editUsernamePasswordGrid">
+    <div>username: </div><div id="currentUserName"><%= name %></div><input id="editedusername" name="editedusername" class="userInput"><div id="editusernamebtn" onclick="editusername()">Edit</div><button id="saveUsernameBtn">Save</button>
+    </div><!--end of username upper half class="editUsernamePasswordGrid"-->
+    <div id="editUNLowerHalf">
+    <div id="uNeditStatusMsg">Please enter password to confirm.</div>
+    <div class="editUsernamePasswordGrid">
+    <div>password: </div><input id="currentPWEditUN" type="password" name="currentPWEditUN" class="userInput">
+    </div><!--end of username lower half class="editUsernamePasswordGrid"-->
+    </div><!--end of id="editUNLowerHalf" -->
+    </form>
+    
+    <!--edit passowrd section--------------->
+    <form id ="editPassowrdForm" action="/editPassword" method="POST">
+    <div class="editUsernamePasswordGrid">
+    <div>password: </div><div id="currentPassword">****</div><div id="editpasswordbtn" onclick="editpassword()">Edit</div><button id="savePasswordBtn">Save</button>
+    </div><!--end of password class="editUsernamePasswordGrid"-->
+    
+    <div id="newPasswordContainer">
+    
+    <label id ="oldPasswordLabel" for="oldPassword" class="editPasswordLabel">Old Password</label><br>
+    <input id="oldPassword" name="oldPassword" type="password" class="userInput inputSpace"><br>
+    <label id="newPasswordLabel" for="newPassword" class="editPasswordLabel">New Password</label><br>
+    <input id="newPassword" name="newPassword" type="password" class="userInput inputSpace"><br>
+    <label id="reEnteredNewPWDLabel" for="reEnteredNewPWD" class="editPasswordLabel">Confirm New Passowrd</label><br>
+    <input id="reEnteredNewPWD" name="reEnteredNewPWD" type="password" class="userInput inputSpace">
+    
+    <!--<div id="submissionStatusMsg"></div>-->
+    </div><!--end of id="newPasswordContainer"-->
+    
+    </form><!--end of id ="editPassowrdForm" -->
+    <div id="orNote">OR</div>
+    
+    <!--delete account section------------------------------------------->
+    <div id="deleteAcctSection">
+    <div id="deleteAcctGrid">
+    <input id="deleteAccountCheckBox" type="checkbox" onclick="deleteAcct()"><div>Delete Account</div>
+    </div><!--end of id="deleteAcctGrid" -->
+    <div id="deleteMsgAndConfirmSect">
+    <div>*This will delete all records of this user account. Please enter password to acknowledge this message and submit.</div>
+    <form id="deleteAcctForm">
+    <input type="password" id="deleteAcctuserPW" name="deleteAcctuserPW" class="userInput inputSpace"><button id="deleteAcctBtn">Delete</button>
+    </form><!--end of id="deleteAcctForm"-->
+    </div><!--end of id="deleteMsgAndConfirmSect" -->
+    </div><!--end of id="deleteAcctSection" -->
+    
+    </div><!--end of id ="editAcctContainer"-->
+    </div><!--end of id="editAcctModal" -->
 
-<div class="backgroundOptHeaderBtns">
-<div id="editAcctBack" onclick="editAcctBack()">&larr;</div><div id="editAcctExit" onclick="editAcctExit()">x</div>
-</div><!--end of class="backgroundOptHeaderBtns"-->
-
-<div id="eidtAcctTitle">Edit Account</div>
-
-<form action="/editUsername" method="POST" class="editUsernamePasswordGrid">
-<div>username: </div><div id="currentUserName"><%= name %></div><input id="editedusername" name="editedusername" class="userInput"><div id="editusernamebtn" onclick="editusername()">Edit</div><button id="saveUsernameBtn">Save</button>
-</form><!--end of username class="editUsernamePasswordGrid"-->
-<form id ="editPassowrdForm" action="/editPassword" method="POST">
-<div class="editUsernamePasswordGrid">
-<div>password: </div><div id="currentPassword">****</div><div id="editpasswordbtn" onclick="editpassword()">Edit</div><button id="savePasswordBtn">Save</button>
-</div><!--end of password class="editUsernamePasswordGrid"-->
-
-<div id="newPasswordContainer">
-
-<label id ="oldPasswordLabel" for="oldPassword" class="editPasswordLabel">Old Password</label><br>
-<input id="oldPassword" name="oldPassword" type="password" class="userInput inputSpace"><br>
-<label id="newPasswordLabel" for="newPassword" class="editPasswordLabel">New Password</label><br>
-<input id="newPassword" name="newPassword" type="password" class="userInput inputSpace"><br>
-<label id="reEnteredNewPWDLabel" for="reEnteredNewPWD" class="editPasswordLabel">Confirm New Passowrd</label><br>
-<input id="reEnteredNewPWD" name="reEnteredNewPWD" type="password" class="userInput inputSpace">
-
-<!--<div id="submissionStatusMsg"></div>-->
-</div><!--end of id="newPasswordContainer"-->
-
-</form>
-
-</div><!--end of id ="editAcctContainer"-->
-</div><!--end of id="editAcctModal" -->
-
+<!--========================ALL JAVASCRIPT FUNCTIONS BELOW==============================-->
 <script>
 function time(){
 
@@ -585,6 +665,9 @@ document.getElementById("optionsModal").style.display = "none";
 function background(){
 document.getElementById("optionsModal").style.display = "none";
 document.getElementById("backgroundOptModal").style.display = "block";
+
+document.getElementById("bpOptContent").style.display ="none";//remove display of previously opened Background Option Photo Content Selection
+document.getElementById("bgOptTextContent").style.display="none";//remove display of previously opened Background Option Text Content Selection
 }
 
 //display edit account modal---------------
@@ -612,6 +695,7 @@ var optionDisplay = document.getElementById("bpOptContent").style.display;
 
 if(optionDisplay !== "block"){
 document.getElementById("bpOptContent").style.display = "block";
+document.getElementById("bgOptTextContent").style.display = "none";
 }
 else if (optionDisplay == "block"){
 document.getElementById("bpOptContent").style.display = "none";
@@ -627,6 +711,7 @@ var optionDisplay = document.getElementById("bgOptTextContent").style.display;
 
 if(optionDisplay !== "block"){
 document.getElementById("bgOptTextContent").style.display = "block";
+document.getElementById("bpOptContent").style.display = "none";
 }
 else if (optionDisplay == "block"){
 document.getElementById("bgOptTextContent").style.display = "none";
@@ -777,15 +862,41 @@ document.getElementById("notes").style.color = bodyTextColor;
 
 //EDIT ACCOUNT MODAL FUNCTIONS====================================
 
-//return to options modal from edit account modal--------------
+//Return to options modal from edit account modal--------------//
 function editAcctBack(){
 document.getElementById("optionsModal").style.display = "block";
 document.getElementById("editAcctModal").style.display = "none";
+
+document.getElementById("editedusername").style.display = "none";
+document.getElementById("editusernamebtn").style.display = "block";
+document.getElementById("currentUserName").style.display ="block";
+document.getElementById("saveUsernameBtn").style.display = "none";
+document.getElementById("editUNLowerHalf").style.display = "none";
+
+document.getElementById("newPasswordContainer").style.display ="none";
+document.getElementById("savePasswordBtn").style.display="none";
+document.getElementById("editpasswordbtn").style.display="block";
+
+document.getElementById("deleteAccountCheckBox").checked = false;
+document.getElementById("deleteMsgAndConfirmSect").style.display="none";
 }//end of editAcctBack()
 
 //close edit account modal-------------------
 function editAcctExit(){
 document.getElementById("editAcctModal").style.display = "none";
+
+document.getElementById("editedusername").style.display = "none";
+document.getElementById("editusernamebtn").style.display = "block";
+document.getElementById("currentUserName").style.display ="block";
+document.getElementById("saveUsernameBtn").style.display = "none";
+document.getElementById("editUNLowerHalf").style.display = "none";
+
+document.getElementById("newPasswordContainer").style.display ="none";
+document.getElementById("savePasswordBtn").style.display="none";
+document.getElementById("editpasswordbtn").style.display="block";
+
+document.getElementById("deleteAccountCheckBox").checked = false;
+document.getElementById("deleteMsgAndConfirmSect").style.display="none";
 }//editAcctExit()
 
 //display to edit username--------------------------
@@ -797,6 +908,16 @@ document.getElementById("currentUserName").style.display ="none";
 document.getElementById("saveUsernameBtn").style.display = "block";
 document.getElementById("editedusername").style.display = "block";
 document.getElementById("editedusername").value = currentUserName;
+document.getElementById("currentPWEditUN").value = "";
+document.getElementById("editUNLowerHalf").style.display = "block";
+
+document.getElementById("newPasswordContainer").style.display ="none";
+document.getElementById("savePasswordBtn").style.display="none";
+document.getElementById("editpasswordbtn").style.display="block";
+
+document.getElementById("deleteAccountCheckBox").checked = false;
+document.getElementById("deleteMsgAndConfirmSect").style.display="none";
+
 }//end of editusername()
 
 //display to edit password---------------------------
@@ -804,7 +925,40 @@ function editpassword(){
 document.getElementById("editpasswordbtn").style.display ="none";
 document.getElementById("savePasswordBtn").style.display ="block";
 document.getElementById("newPasswordContainer").style.display ="block";
+document.getElementById("oldPassword").value ="";
+document.getElementById("newPassword").value ="";
+document.getElementById("reEnteredNewPWD").value ="";
+
+document.getElementById("editedusername").style.display = "none";
+document.getElementById("editusernamebtn").style.display = "block";
+document.getElementById("currentUserName").style.display ="block";
+document.getElementById("saveUsernameBtn").style.display = "none";
+document.getElementById("editUNLowerHalf").style.display = "none";
+
+document.getElementById("deleteAccountCheckBox").checked = false;
+document.getElementById("deleteMsgAndConfirmSect").style.display="none";
+}//end of editpassword()
+
+function deleteAcct(){
+var check = document.getElementById("deleteAccountCheckBox").checked;
+
+if(check == true){
+document.getElementById("deleteMsgAndConfirmSect").style.display="block";
+document.getElementById("deleteAcctuserPW").value ="";
+
+document.getElementById("editpasswordbtn").style.display ="block";
+document.getElementById("savePasswordBtn").style.display ="none";
+document.getElementById("newPasswordContainer").style.display ="none";
+
+document.getElementById("editedusername").style.display = "none";
+document.getElementById("editusernamebtn").style.display = "block";
+document.getElementById("currentUserName").style.display ="block";
+document.getElementById("saveUsernameBtn").style.display = "none";
+document.getElementById("editUNLowerHalf").style.display = "none";
 }
+else{
+document.getElementById("deleteMsgAndConfirmSect").style.display="none";}
+}//end of deleteAcct()
 </script>
 </body>
 </html>

@@ -590,7 +590,7 @@ display: none;
     <!--edit username section ----------------->
     <form action="/editUsername" method="POST" >
     <div class="editUsernamePasswordGrid">
-    <div>username: </div><div id="currentUserName">Kim</div><input id="editedusername" name="editedusername" class="userInput"><div id="editusernamebtn" onclick="editusername()">Edit</div><button id="saveUsernameBtn">Save</button>
+    <div>username: </div><div id="currentUserName"><%= name %></div><input id="editedusername" name="editedusername" class="userInput"><div id="editusernamebtn" onclick="editusername()">Edit</div><button id="saveUsernameBtn">Save</button>
     </div><!--end of username upper half class="editUsernamePasswordGrid"-->
     <div id="editUNLowerHalf">
     <div id="uNeditStatusMsg">Please enter password to confirm.</div>
