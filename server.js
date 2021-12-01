@@ -27,6 +27,7 @@ app.set("view engine", "ejs");
 
 app.use(express.urlencoded({ extended: false }));
 
+//code to connect to mongoDB--------------
 const uri = process.env.ATLAS_URI;
 mongoose.connect(uri);
 const connection = mongoose.connection;
@@ -34,7 +35,7 @@ connection.once('open', () => {
     console.log("MongoDB database connection established successfully");
 })
 
-//login/signup session connection code
+//login/signup session connection code----------
 var store = new MongoDBStore({
     uri: process.env.ATLAS_URI,
     collection: 'mySessions'
@@ -69,8 +70,9 @@ const isAuth = (req, res, next) => {
 //require the user model needed-----------
 let User = require('./models/user.model');//require the user model needed
 let Notes = require('./models/notes.model');//require the notes model needed
+const { Store } = require('express-session');
 
-//sign up function================================================================
+//===================SIGN UP FUNCTION===============================================
 app.post("/sign_up", async (req,res) => {
     const username = req.body.newUsername;//username inserted to form
     const password = req.body.newPassword;//password inserted to form
@@ -93,7 +95,7 @@ app.post("/sign_up", async (req,res) => {
         res.redirect('/');//redirect to root page***change to redirect to home/landing page
     }
 })
-//login function===========================================================
+//======================LOGIN FUNCTION========================================
 app.post("/login", async (req,res)=>{
     const username = req.body.username;//username inserted to form
     const password = req.body.password;//password inserted to form
@@ -113,6 +115,7 @@ app.post("/login", async (req,res)=>{
     }
     req.session.isAuth = true;
     req.session.username = username;
+    //req.session.userID = user._id;
     res.redirect("/notes");
 })
 
@@ -150,34 +153,49 @@ else{//if notes do not yet exist, prepare notes document
 
 //======================UPDATE ACCT INFORMATION===================================
 //======================UPDATE USERNAME===========================================
-// app.post("/editUsername",async (req,res)=>{//this froze the DB**,did update username in notes collection, include update for sessionuser's name
+app.post("/editUsername", async (req,res)=>{//this froze the DB**,did update username in notes collection, include update for sessionuser's name
 
-//     var sessionuser = req.session.username;
-//     var editedUserName = req.body.editedusername;
-//     console.log(sessionuser);
+    var sessionuser = req.session.username;
+    var editedUserName = req.body.editedusername;
+    var currentPW = req.body.currentPWEditUN;
 
-//     let user0 = await User.findOne({sessionuser});//check users collection for username
-//     let user = await Notes.findOne({sessionuser});//check notes collection for username
-//     let newUN = await User.findOne({editedUserName});
-//     let newUN0 = await Notes.findOne({editedUserName});
-//     if (user0 && !newUN0){//if username exists and new entered username not yet used, update username in user collection
-//         console.log("username located. new username not yet used");
-//         //note new text and current session user as for entry-------------
-//         user0.username = editedUserName;
+    console.log(sessionuser);//current username
+
+    let specificUser = await User.find({username: sessionuser});//find current user in database
+    let newUsername = await User.find({username: editedUserName});//find, if available, proposed new username in database
+
+    console.log("specific user: " + specificUser);//check which user was located
     
-//         await user0.save();//save updated username to DB  
-//     }
+    const isMatch = await bcrypt.compare(currentPW, specificUser[0].password);//compares input password with hashed password
 
-//     if (user && !newUN){//if username exists and new entered username not yet used, update username in notes collection
-//         console.log("username located. new username not yet used");
-//         //note new text and current session user as for entry-------------
-//         user.username = editedUserName;
-    
-//         await user.save();//save updated username to DB   
-//     }
+    if(!isMatch){//if the password doesn't match, return user to notes page**insert flash error here**
+        console.log("Password does not match for user update");
+        return res.redirect("/notes");
+    }
 
-//     return res.end();//stay on notes page
-//     })
+    else{
+
+        console.log("This username already taken in database: " + newUsername);//display attempted username if it was already taken in the users collection
+
+        if (newUsername ==""){//if new entered username does not yet exist in user collection, update username in user and notes collections (because all usernames from notes collections are inherited from users collection)
+            console.log("new username not yet used in user database");
+            //take the current username from users and notes collections and update it to the new entered username-------------
+            
+            let specificUserNotes = await Notes.findOneAndUpdate({username: sessionuser}, { username: editedUserName });//update username in notes collection
+            let specificUserUpdate = await User.findOneAndUpdate({username: sessionuser}, { username: editedUserName });//update username in users collection
+
+            req.session.username = editedUserName;
+            //reload session to contain new username
+            req.session.reload(function(err) {
+                console.log(err);
+              })
+
+        }
+
+        return res.redirect('/notes');//stay on notes page
+    }
+
+});
     
 //================UPDATE PASSWORD======================================
 // app.post("/editPassword", async (req,res)=>{

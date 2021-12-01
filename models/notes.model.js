@@ -16,6 +16,10 @@ const notesSchema = new Schema({
         unique: false,
         trim: false
     }
+    // userID: {
+    //     type: Number,
+    //     required: true
+    // }
 },{
     timestamps: true,
 }
