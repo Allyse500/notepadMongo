@@ -199,34 +199,34 @@ app.post("/editUsername", async (req,res)=>{//this froze the DB**,did update use
 });
     
 //================UPDATE PASSWORD======================================
-// app.post("/editPassword", async (req,res)=>{
-//     const username = req.session.username;//name of user for current session
-//     const oldPW = req.body.oldPassword;//what the user entered to be the current DB passowrd for their acct
-//     const newPW = req.body.newPassword;//what the user entered for new passoword
-//     const confirmNewPW = req.body.reEnteredNewPWD;//what the user re-entered for new passoword
+app.post("/editPassword", async (req,res)=>{
+    const username = req.session.username;//name of user for current session
+    const oldPW = req.body.oldPassword;//what the user entered to be the current DB passowrd for their acct
+    const newPW = req.body.newPassword;//what the user entered for new passoword
+    const confirmNewPW = req.body.reEnteredNewPWD;//what the user re-entered for new passoword
 
-//     let user = await User.findOne({username});//check user collection for username
+    let user = await User.findOne({username: username});//check user collection for username
 
-//     const isMatch = await bcrypt.compare(oldPW, user.password);//compares input password with hashed password
+    const isMatch = await bcrypt.compare(oldPW, user.password);//compares input password with hashed password
 
-//     if(!isMatch){//if the password doesn't match, do not submit, stay on user page
-//         console.log("not matched");
-//         return res.end();
-//     }
-//     else if (isMatch){//if the password does match, check for matching re-entered passwords
-//         if(newPW === confirmNewPW){//if re-entered passwords do match, submit new password to DB
-//             const hashedPW = await bcrypt.hash(confirmNewPW, 10);//hash password with salt of 10 times encryption
-//             user.password = hashedPW;
-//             await user.save();//save updated password to DB 
-//             return res.end();//stay on notes page
-//         }
-//         else{
-//             console.log("not matched");
-//             return res.end();//stay on notes page
-//         }
-//     }
+    if(!isMatch){//if the password doesn't match, do not submit, stay on user page
+        console.log("not matched");
+        return res.redirect("/notes");
+    }
+    else if (isMatch){//if the password does match, check for matching re-entered passwords
+        if(newPW === confirmNewPW){//if re-entered passwords do match, submit new password to DB
+            const hashedPW = await bcrypt.hash(confirmNewPW, 10);//hash password with salt of 10 times encryption
+            user.password = hashedPW;
+            await user.save();//save updated password to DB 
+            return res.redirect("/notes");//stay on notes page
+        }
+        else{
+            console.log("not matched");
+            return res.redirect("/notes");//stay on notes page
+        }
+    }
     
-// })
+})
 
 //===============LOGOUT FUNCTION========================================
 app.post("/logout", (req,res)=>{
@@ -263,7 +263,7 @@ if (notes){//if notes already exist for user, load to page
 else{//if notes do not yet exist for user, render empty notes document
         res.render("notes.ejs", {notes: "", name: sessionuser});
     }
-    res.end();
+    
 })
 
 //starts server==========================================
