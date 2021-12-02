@@ -628,7 +628,7 @@ display: none;
     </div><!--end of id="deleteAcctGrid" -->
     <div id="deleteMsgAndConfirmSect">
     <div>*This will delete all records of this user account. Please enter password to acknowledge this message and submit.</div>
-    <form id="deleteAcctForm">
+    <form id="deleteAcctForm" method="POST" action="/deleteAcct">
     <input type="password" id="deleteAcctuserPW" name="deleteAcctuserPW" class="userInput inputSpace"><button id="deleteAcctBtn">Delete</button>
     </form><!--end of id="deleteAcctForm"-->
     </div><!--end of id="deleteMsgAndConfirmSect" -->

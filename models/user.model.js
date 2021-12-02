@@ -15,14 +15,9 @@ const userSchema = new Schema({
         required: true,
         uniquie: true,
         trim: true,
-        minlength: 8
-    },
-    notes: {
-        type: String,
-        required: false,
-        unique: false,
-        trim: false
+        minlength: 3
     }
+    
 },{
     timestamps: true,
 }

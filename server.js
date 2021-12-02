@@ -266,7 +266,34 @@ else{//if notes do not yet exist for user, render empty notes document
     
 })
 
-//starts server==========================================
+//===================DELETE ACCOUNT=============================================
+app.post("/deleteAcct", async (req,res)=>{
+var password = req.body.deleteAcctuserPW;
+var username = req.session.username;
+
+let user = await User.findOne({username: username});//check user collection for username
+console.log("user located for delete" + user);
+const isMatch = await bcrypt.compare(password, user.password);//compares input password with hashed password
+
+    if(!isMatch){//if the password doesn't match, do not submit, stay on user page
+        console.log("not matched");
+        return res.redirect("/notes");
+    }
+    else if(isMatch){//if the password does match, check for matching re-entered passwords
+            console.log("user to be deleted: " + user);
+            await User.findOneAndDelete({username: username});
+            await Notes.findOneAndDelete({username: username});
+            req.session.destroy((err)=>{
+                if(err){
+                    console.log("Error: " + err);
+                }});
+            console.log("user deleted: " + user);
+            return res.redirect("/");//stay on notes page
+        }
+        
+})
+
+//=========================START SERVER=================================
 app.listen(port, () => {
     console.log(`Server is running on port: ${port}`);
 });
