@@ -77,7 +77,7 @@ app.post("/sign_up", async (req,res) => {
     const username = req.body.newUsername;//username inserted to form
     const password = req.body.newPassword;//password inserted to form
 
-    let user = await User.findOne({username});//check user collection for username
+    let user = await User.findOne({username: username});//check user collection for username
 
     if (user){//if username already exists
         console.log("user already exists.");
@@ -100,7 +100,9 @@ app.post("/login", async (req,res)=>{
     const username = req.body.username;//username inserted to form
     const password = req.body.password;//password inserted to form
 
-    let user = await User.findOne({username});//check user collection for username
+    let user = await User.findOne({username: username});//check user collection for username
+
+    //console.log("located user for login: " + user);
 
     if (!user){//if the user does not exsist, return to the home page
         console.log("not a user");
@@ -115,17 +117,16 @@ app.post("/login", async (req,res)=>{
     }
     req.session.isAuth = true;
     req.session.username = username;
-    //req.session.userID = user._id;
     res.redirect("/notes");
 })
 
-//submit notes to database, sucessfully updates or inserts new note to DB===============================================
+//==============================SUBMIT NOTES TO DATABASE==============================
 app.post("/submit_notes",async (req,res)=>{
 
 var sessionuser = req.session.username;
 var textnotes = req.body.notes;
 console.log(sessionuser);
-let notes = await Notes.findOne({sessionuser});//check notes collection for username
+let notes = await Notes.findOne({username: sessionuser});//check notes collection for username
 
 if (notes){//if notes already exist***place for update
     console.log("notes already exist.");
@@ -246,22 +247,22 @@ app.post("/logout", (req,res)=>{
 
 //=====================WHAT TO DO WHEN '/NOTES' ROUTE IDENTIFIED====================
 app.get("/notes", isAuth,  async (req,res)=>{
-    //res.render("notes");
-    // console.log("reached notes page");
-    // console.log("is Auth: " + req.session.isAuth);
 
 var sessionuser = req.session.username;//session user's name
 
     console.log(sessionuser);
-let notes = await Notes.findOne({sessionuser});//check user collection for username
+let notes = await Notes.findOne({username: sessionuser});//check user collection for username
 
-if (notes){//if notes already exist***place for update
-    console.log("notes already exist: " + notes.notes);
-    console.log("session username: " + sessionuser);
-    //call back notes submitted to database-------------
-    res.render("notes.ejs", {notes: notes.notes, name: sessionuser});//{name: sessionuser},
+if (notes){//if notes already exist for user, load to page
+        console.log("notes already exist: " + notes.notes);
+        console.log("session username: " + sessionuser);
+        //call back notes submitted to database-------------
+        res.render("notes.ejs", {notes: notes.notes, name: sessionuser});
 
-}
+    }
+else{//if notes do not yet exist for user, render empty notes document
+        res.render("notes.ejs", {notes: "", name: sessionuser});
+    }
     res.end();
 })
 
