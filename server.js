@@ -252,16 +252,18 @@ var sessionuser = req.session.username;//session user's name
 
     console.log(sessionuser);
 let notes = await Notes.findOne({username: sessionuser});//check user collection for username
+//var photovariable = (notes.photo == null) ? "flower.jpg":notes.photo;
+//console.log(photovariable);
 
 if (notes){//if notes already exist for user, load to page
         console.log("notes already exist: " + notes.notes);
         console.log("session username: " + sessionuser);
         //call back notes submitted to database-------------
-        res.render("notes.ejs", {notes: notes.notes, name: sessionuser});
+        res.render("notes.ejs", {notes: notes.notes, name: sessionuser});//, photo: photovariable
 
     }
 else{//if notes do not yet exist for user, render empty notes document
-        res.render("notes.ejs", {notes: "", name: sessionuser});
+        res.render("notes.ejs", {notes: "", name: sessionuser});//, photo: photovariable
     }
     
 })
