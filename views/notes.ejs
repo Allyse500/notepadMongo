@@ -8,7 +8,7 @@
 <style>
     
 body {
-  background-image: url("flower.jpg");
+  background-image: url("<%=photo%>");
   background-size: 1300px 700px;
   /* background-size:contain; */
   background-position: center;
@@ -543,7 +543,6 @@ display: none;
         </div><!--end of flower class ="photoContainer"-->
         </div><!--end of flower photoOptGrid-->
         <br>
-
         <div class="photoOptGrid">
         <input type="checkbox" id="bridgeInputTag" name="bridge" onclick="style2()" onmouseover="bridgePhotoHiglight()" onmouseleave = "bridgePhotoRemoveHiglight()">
         <div class ="photoContainer">
@@ -567,7 +566,7 @@ display: none;
         <label for="bodyTextColor" class="promptText">Body Text</label><input type="color" id="bodyTextColor" name="bodyTextColor" onclick="changeTextColor2()">
    
         </div><!--end of id="bgOptTextContent" -->
-        <button id="bgOptSaveBtn" onclick="changeTextColor()">Save</button>
+        <button id="bgOptSaveBtn">Save</button>
       </form>
 </div><!--end of id="backgroundOptContainer" -->
 </div><!--end of id="backgroundOptModal" -->
@@ -631,7 +630,7 @@ display: none;
     </div><!--end of id="deleteAcctSection" -->
     
     </div><!--end of id ="editAcctContainer"-->
-    </div><!--end of id="editAcctModal" -->
+    </div><!--end of id="editAcctModal" --> 
 
 <!--========================ALL JAVASCRIPT FUNCTIONS BELOW==============================-->
  <!-- <link class="jsbin" href="http://ajax.googleapis.com/ajax/libs/jqueryui/1/themes/base/jquery-ui.css" rel="stylesheet" type="text/css" /> -->
@@ -666,7 +665,7 @@ document.getElementById("optionsModal").style.display = "none";
 function background(){
 document.getElementById("optionsModal").style.display = "none";
 document.getElementById("backgroundOptModal").style.display = "block";
-
+document.getElementById("uploadedPhoto").style.display = "none";
 document.getElementById("bpOptContent").style.display ="none";//remove display of previously opened Background Option Photo Content Selection
 document.getElementById("bgOptTextContent").style.display="none";//remove display of previously opened Background Option Text Content Selection
 }
@@ -831,19 +830,16 @@ function style3(input){
             };
 
             reader.readAsDataURL(input.files[0]);
+            // console.log(input.files[0]);
+            // console.log("File name: " + input.files[0].name);
+            // console.log("File size: " + input.files[0].size);
+            // console.log("File type: " + input.files[0].type);
         }        
 }
 
-//submit all text color choices-----------------
-function changeTextColor(){
-var headerColor = document.getElementById("headerColor").value;
-var bodyTextColor = document.getElementById("bodyTextColor").value;
-
-document.getElementById("noteTitle").style.color = headerColor;
-document.getElementById("time").style.color = headerColor;
-
-document.getElementById("notes").style.color = bodyTextColor;
-}//end of changeTextColor()
+// function loadPhoto(){
+//     document.getElementById("bodyID").style.backgroundImage= "url('" + e.target.result + "')";
+// }
 
 //change color of header (Title & Time)------------------
 function changeTextColor1(){

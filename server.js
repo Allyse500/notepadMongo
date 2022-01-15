@@ -5,10 +5,14 @@ const morgan = require('morgan');
 const session = require('express-session');
 const MongoDBStore = require('connect-mongodb-session')(session);
 const bcrypt = require('bcrypt');
+const multer = require('multer');
+const fs = require('fs');
+const path = require('path');
+const FileReader = require('filereader');
 // const passport = require('passport');
 // const LocalStrategy = require("passport-local");
 // const passportLocalMongoose =
-//         require("passport-local-mongoose");
+// require("passport-local-mongoose");
 
 
 
@@ -70,6 +74,7 @@ const isAuth = (req, res, next) => {
 //require the user model needed-----------
 let User = require('./models/user.model');//require the user model needed
 let Notes = require('./models/notes.model');//require the notes model needed
+let UserBackground = require('./models/userBackgrounds.model');//require the backgrounds model needed
 const { Store } = require('express-session');
 
 //===================SIGN UP FUNCTION===============================================
@@ -117,7 +122,73 @@ app.post("/login", async (req,res)=>{
     }
     req.session.isAuth = true;
     req.session.username = username;
+    req.session.userID = user._id;
+    console.log(user._id);
     res.redirect("/notes");
+})
+
+//===============LOGOUT FUNCTION========================================
+app.post("/logout", (req,res)=>{
+    req.session.destroy((err)=>{
+        if(err){
+            console.log("Error: " + err);
+            res.redirect("/");
+        }
+    })
+    console.log("Logging out");
+    res.redirect("/");
+})
+
+// app.get("/", (req,res) =>{
+//     //res.send("Hello from Root");
+//     res.redirect("/");
+// })
+
+//=====================WHAT TO DO WHEN '/NOTES' ROUTE IDENTIFIED====================
+app.get("/notes", isAuth,  async (req,res)=>{
+
+var sessionuser = req.session.username;//session user's name
+var userID = req.session.userID;
+
+    console.log(sessionuser);
+let notes = await Notes.findOne({username: sessionuser});//check user collection for username
+let bgPhoto = await UserBackground.find({userID: userID});
+// console.log("bgPhoto.length: " + bgPhoto.length);
+// console.log("bgPhoto.length: " + bgPhoto);
+// console.log("bgPhoto.image.contentType:" + bgPhoto.image.contentType);
+// console.log("bgPhoto.image.data:" + bgPhoto.image.data);
+//var photovariable = (bgPhoto.length == 0) ? "flower.jpg": bgPhoto.image;
+//var decodedImage = "userBackgrounds/" + bgPhoto[0].image.data;
+var photovariable = (bgPhoto.length == 0)? "flower.jpg":"userBackgrounds/" + bgPhoto[0].image.data;
+console.log("photovariable: " + photovariable);
+console.log("photovariable single out: " + photovariable);
+
+
+if (notes){//if notes already exist for user, load to page
+        console.log("notes already exist: " + notes.notes);
+        console.log("session username: " + sessionuser);
+        //call back notes submitted to database-------------
+        return res.render("notes.ejs", 
+        //------------NOTES DOCUMENT------------//
+        {
+        notes: notes.notes,
+        //---------------USER INFO--------------//
+        name: sessionuser,
+        photo: photovariable
+        });//, photo: photovariable
+
+    }
+else{//if notes do not yet exist for user, render empty notes document
+        return res.render("notes.ejs", 
+        //------------NOTES DOCUMENT------------//
+        {
+        notes: "", 
+        //---------------USER INFO--------------//
+        name: sessionuser,
+        photo: photovariable
+        });//, photo: photovariable
+    }
+    
 })
 
 //==============================SUBMIT NOTES TO DATABASE==============================
@@ -151,6 +222,58 @@ else{//if notes do not yet exist, prepare notes document
 }
 
 })
+
+//======================UPDATE BACKGROUND PHOTO==================================  
+// var storage = multer.diskStorage({
+//     destination: (req, file, cb) => {
+//         cb(null, 'userBackgrounds')
+//     },
+//     filename: (req, file, cb) => {
+//         cb(null, file.fieldname + '-' + Date.now())
+//     }
+// });
+  
+// var upload = multer({ storage: storage });
+
+const Storage = multer.diskStorage({
+    destination: 'public/userBackgrounds',
+    filename: (req,file,cb)=>{
+        cb(null,file.originalname)
+    }
+})
+
+const upload = multer({
+    storage:Storage
+}).single('uploadInputTag');
+
+app.post("/background", async (req,res)=>{
+    //declare variables
+    var sessionuser = req.session.userID;
+
+    let photo = await UserBackground.find({userID: sessionuser});//check user background photo collection for userID
+    //if no photo located for user, insert photo as user photo
+    if (photo.length == 0){
+   
+        upload(req,res,(err)=>{
+            if(err){
+                console.log(err);
+            }
+            else{
+                const newImage = new UserBackground({
+                    userID: sessionuser,
+                    image: {
+                        data:req.file.filename,
+                        contentType: "image/jpg"
+                    }
+                })
+                newImage.save()
+                .then(()=>res.redirect("/notes"))
+                .catch(err=>{console.log(err)});
+            }
+        })
+    }//end of if (photo.length == 0)
+});//end of app.post("/background",...);
+
 
 //======================UPDATE ACCT INFORMATION===================================
 //======================UPDATE USERNAME===========================================
@@ -228,72 +351,35 @@ app.post("/editPassword", async (req,res)=>{
     
 })
 
-//===============LOGOUT FUNCTION========================================
-app.post("/logout", (req,res)=>{
-    req.session.destroy((err)=>{
-        if(err){
-            console.log("Error: " + err);
-            res.redirect("/");
-        }
-    })
-    console.log("Logging out");
-    res.redirect("/");
-})
-
-// app.get("/", (req,res) =>{
-//     //res.send("Hello from Root");
-//     res.redirect("/");
-// })
-
-//=====================WHAT TO DO WHEN '/NOTES' ROUTE IDENTIFIED====================
-app.get("/notes", isAuth,  async (req,res)=>{
-
-var sessionuser = req.session.username;//session user's name
-
-    console.log(sessionuser);
-let notes = await Notes.findOne({username: sessionuser});//check user collection for username
-//var photovariable = (notes.photo == null) ? "flower.jpg":notes.photo;
-//console.log(photovariable);
-
-if (notes){//if notes already exist for user, load to page
-        console.log("notes already exist: " + notes.notes);
-        console.log("session username: " + sessionuser);
-        //call back notes submitted to database-------------
-        res.render("notes.ejs", {notes: notes.notes, name: sessionuser});//, photo: photovariable
-
-    }
-else{//if notes do not yet exist for user, render empty notes document
-        res.render("notes.ejs", {notes: "", name: sessionuser});//, photo: photovariable
-    }
-    
-})
-
 //===================DELETE ACCOUNT=============================================
 app.post("/deleteAcct", async (req,res)=>{
-var password = req.body.deleteAcctuserPW;
-var username = req.session.username;
-
-let user = await User.findOne({username: username});//check user collection for username
-console.log("user located for delete" + user);
-const isMatch = await bcrypt.compare(password, user.password);//compares input password with hashed password
-
-    if(!isMatch){//if the password doesn't match, do not submit, stay on user page
-        console.log("not matched");
-        return res.redirect("/notes");
-    }
-    else if(isMatch){//if the password does match, check for matching re-entered passwords
-            console.log("user to be deleted: " + user);
-            await User.findOneAndDelete({username: username});
-            await Notes.findOneAndDelete({username: username});
-            req.session.destroy((err)=>{
-                if(err){
-                    console.log("Error: " + err);
-                }});
-            console.log("user deleted: " + user);
-            return res.redirect("/");//stay on notes page
+    var password = req.body.deleteAcctuserPW;
+    var username = req.session.username;
+    
+    let user = await User.findOne({username: username});//check user collection for username
+    console.log("user located for delete" + user);
+    const isMatch = await bcrypt.compare(password, user.password);//compares input password with hashed password
+    
+        if(!isMatch){//if the password doesn't match, do not submit, stay on user page
+            console.log("not matched");
+            return res.redirect("/notes");
         }
-        
-})
+        else if(isMatch){//if the password does match, check for matching re-entered passwords
+                console.log("user to be deleted: " + user);
+                await User.findOneAndDelete({username: username});
+                await Notes.findOneAndDelete({username: username});
+                req.session.destroy((err)=>{
+                    if(err){
+                        console.log("Error: " + err);
+                    }});
+                console.log("user deleted: " + user);
+                return res.redirect("/");//stay on notes page
+            }
+            
+    })
+
+
+
 
 //=========================START SERVER=================================
 app.listen(port, () => {
