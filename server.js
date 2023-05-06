@@ -224,16 +224,6 @@ else{//if notes do not yet exist, prepare notes document
 })
 
 //======================UPDATE BACKGROUND PHOTO==================================  
-// var storage = multer.diskStorage({
-//     destination: (req, file, cb) => {
-//         cb(null, 'userBackgrounds')
-//     },
-//     filename: (req, file, cb) => {
-//         cb(null, file.fieldname + '-' + Date.now())
-//     }
-// });
-  
-// var upload = multer({ storage: storage });
 
 const Storage = multer.diskStorage({
     destination: 'public/userBackgrounds',
@@ -253,7 +243,7 @@ app.post("/background", async (req,res)=>{
     let photo = await UserBackground.find({userID: sessionuser});//check user background photo collection for userID
     //if no photo located for user, insert photo as user photo
     if (photo.length == 0){
-   
+        
         upload(req,res,(err)=>{
             if(err){
                 console.log(err);
@@ -272,6 +262,46 @@ app.post("/background", async (req,res)=>{
             }
         })
     }//end of if (photo.length == 0)
+    //update user photo: update photo in user db, remove previous photo from folder and insert newly selected photo 
+    else{
+
+        //1. delete previous file
+        fs.unlink("userBackgrounds/" + photo[0].image.data, (err => {
+            if (err) console.log(err);
+            else {
+              console.log("Deleted file: " + photo[0].image.data);
+            }
+          }));//end of fs.unlink()//does not yet remove file
+
+        let remvPhoto = await UserBackground.findOneAndDelete({userID: sessionuser});
+        
+        //2. update and insert new file
+            upload(req,res,(err)=>{
+                if(err){
+                    console.log(err);
+                }
+                else{
+                    const newImage = new UserBackground({
+                        userID: sessionuser,
+                        image: {
+                            data:req.file.filename,
+                            contentType: "image/jpg"
+                        }
+                    })
+                    newImage.save()
+                    .then(()=>res.redirect("/notes"))
+                    .catch(err=>{console.log(err)});
+                }
+            })
+        //prepare update object for photo
+        // var newObj = {
+        //     data:req.file.filename,
+        //     contentType: "image/jpg"
+        // }
+        // let updatedPhoto = await UserBackground.findOneAndUpdate({userID: sessionuser}, {image: newObj});
+
+        res.redirect("/notes");
+    }
 });//end of app.post("/background",...);
 
 
