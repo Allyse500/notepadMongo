@@ -7,13 +7,11 @@
     <!-- <script src="index.js"></script> -->
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <style>
-        #bodyID {
+#bodyID {
     background-image: url('notebook.jpg');
-    /* background-size: 1300px 820px; */
     background-size: cover;
     background-position: 0% 0%;
     background-repeat: no-repeat;
-    /* background-color: white; */
     margin: 0;
     overflow-x: hidden;
   }
@@ -129,17 +127,17 @@ padding-top: 1%;
 #headerGrid{
     display: grid;
     grid-template-columns: 50% 50%;
-    /* grid-gap: 0 4%; */
-    /* padding-top: 1%; */
-    /* padding-left: 5%; */
 }
 
 #buttonsGrid{
     display: grid;
-    grid-template-columns: 25% 25% 25%;
+    grid-template-columns: auto auto auto;
+    position:fixed;
+    right:15px;
+    grid-gap:0 30px;
     width: 70%;
+    width: fit-content;
     height: 100px;
-    /* margin-top: 2%; */
     margin-left: 52.5%;
 }
 
@@ -157,18 +155,19 @@ padding-top: 1%;
     border-radius: 25px;
     height: fit-content;
     width: fit-content;
+    width: 80px;
     padding: 5%;
+    text-align:center;
     cursor: pointer;
-    /* transform: translateY(-10%); */
 }
 
 .homeButtons:hover{
     background-color: rgb(60, 60, 60);
 }
 
-#aboutBtn{
+/* #aboutBtn{
     transform: translateX(25%);
-}
+} */
 
 #searchLabel{
     color: white;
@@ -320,7 +319,6 @@ margin-left: 66%;
     border: white 1px solid;
     border-radius: 5px;
     cursor: pointer;
-    /*margin-left: 85%;*/
   }
   
  #signupCloseButton{
@@ -333,7 +331,6 @@ margin-left: 66%;
     border-radius: 5px;
     cursor: pointer;
     padding-top: 1px;
-    /*margin-left: 85%;*/
   }
 
 #signupSubmitBtn:hover, #signupCloseButton:hover {
@@ -358,7 +355,6 @@ margin-left: .5%;
 /*=========================LOGIN PROMPT BOX===============================*/
 #loginModal{
   display: none;
-  /* position: relative; */
   position: fixed; 
   z-index: 1;
   padding-top: 150px;
@@ -451,7 +447,450 @@ font-weight: bold;
 #loginPasswordBlock{
 margin-left: .5%;
 }
-    </style>
+
+/*====================MEDIA:MAX-WIDTH 1270 PX=======================*/
+@media only screen and (max-width: 875px){
+    #bodyID {
+    background-image: url('notebook.jpg');
+    background-size: 100vw 100vh;
+    background-repeat: no-repeat; 
+    margin: 0;
+    overflow-x: hidden;
+  }
+      /* =================SCROLL BAR BEGIN========================== */
+  ::-webkit-scrollbar {
+    width: 15px;
+  }
+  
+  /* Track */
+  ::-webkit-scrollbar-track {
+   box-shadow: inset 0 0 5px grey; 
+   border-radius: 10px;
+  }
+   
+  /* Handle */
+  ::-webkit-scrollbar-thumb {
+    background:rgb(255, 255, 255, 0.5); 
+    box-shadow: inset 0 0 5px grey;
+    border-radius: 10px;
+  }
+  
+  /* Handle on hover */
+  ::-webkit-scrollbar-thumb:hover {
+    background: rgb(216, 216, 216, 0.5);
+    box-shadow: inset 0 0 5px grey;
+  }
+  /* ==================SCROLL BAR END========================= */
+/* ==================LOGIN & SIGN UP CONTAINERS=============== */
+/* #loginContainer{
+    border: 1px solid rgb(0, 0, 0);
+    border-radius: 10px;
+    height: 200px;
+    width: 400px;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 15%;
+    display: none;
+    } */
+    
+    /* #signUpContainer{
+    border: 1px solid rgb(0, 0, 0);
+    border-radius: 10px;
+    height: 200px;
+    width: 400px;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 15%;
+    display: none;
+    } */
+    
+    /* #loginTitle, #signUpTitle{
+    text-align: center;
+    font-size: 150%;
+    font-weight: bold;
+    margin-top: 1%;
+    } 
+    
+    #login, #signUp{
+    margin-left: 20%;
+    margin-top: 10%;
+    }
+    
+    #submitbtn, #submitbtn0{
+    border: 1px solid rgb(0, 0, 0);
+    border-radius: 15px;
+    padding: 1%;
+    width: fit-content;
+    float: right;
+    margin-right: 2%;
+    margin-top: 7%;
+    cursor: pointer;
+    }
+    
+    #username,#password, #newUsername, #newPassword{
+    border-radius: 4px;
+    }
+    
+    #signupbtn {
+    border: 1px solid rgb(0, 0, 0);
+    border-radius: 15px;
+    padding: 1%;
+    width: fit-content;
+    margin-top: -7%;
+    transform: translate(560%,16%);
+    cursor: pointer;
+    }
+    
+    #loginbtn {
+    border: 1px solid rgb(0, 0, 0);
+    border-radius: 15px;
+    padding: 1%;
+    width: fit-content;
+    margin-top: -7%;
+    transform: translate(710%,16%);
+    cursor: pointer;
+    }
+    
+    #signUpTextResponce, #loginTextResponce{
+    text-align:center;
+    transform: translate(-10%,200%);
+    margin-bottom: -6%;
+    display: none;
+    }*/
+
+/* ===================NAVBAR=================================== */
+#navbar{
+margin: 0;
+height: 50px;
+background-color: rgb(0, 0, 0);
+padding-top: 1%;
+}
+
+#headerGrid{
+    display: grid;
+    grid-template-columns: 50% 50%;
+}
+
+#buttonsGrid{
+    display: grid;
+    grid-template-columns: auto auto auto;
+    position:fixed;
+    right:15px;
+    grid-gap:0 30px;
+    width: 70%;
+    width: fit-content;
+    height: 100px;
+    margin-left: 52.5%;
+}
+
+#pageTitle{
+    font-size: 200%;
+    color: white;
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+.homeButtons{
+    font-size: 125%;
+    color: white;
+    font-family: Arial, Helvetica, sans-serif; 
+    border: 4px double white;
+    border-radius: 25px;
+    height: fit-content;
+    width: fit-content;
+    width: 80px;
+    padding: 5%;
+    text-align:center;
+    cursor: pointer;
+}
+
+.homeButtons:hover{
+    background-color: rgb(60, 60, 60);
+}
+
+/* #aboutBtn{
+    transform: translateX(25%);
+} */
+
+#searchLabel{
+    color: white;
+    font-size: 140%;
+    font-family: Arial, Helvetica, sans-serif; 
+}
+
+#searchButton{
+    margin-left: 2%;
+}
+
+/*=========================CENTRAL PAGE TITLE=============================*/
+
+#centralPageTitle{
+font-size: 800%;
+color: orange;
+font-weight: bold;
+font-style: italic;
+margin-top: 10%;
+margin-left: 30%;
+display: block;
+-webkit-text-stroke: 1px rgb(255, 255, 255);
+}
+
+/*=========================ABOUT PROMPT BOX===============================*/
+#aboutModal{
+  display: none;
+  position: fixed; 
+  z-index: 1;
+  padding-top: 100px;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  overflow: auto;
+  background-color: rgba(0, 0, 0, 0.4);
+}
+
+#aboutContainer{
+ margin-left: auto;
+ margin-right: auto;
+ width: 400px;
+ height: fit-content;
+ background-color: rgba(0, 0, 0, .5);
+ border: 5px double rgb(80, 38, 22);
+ border-radius:7px;
+ padding: .75%;
+}
+
+#aboutSecondaryContainer{
+background-color: rgba(107, 142, 35, .75);
+margin-left: auto;
+margin-right: auto;
+padding: 2%;
+}
+
+#aboutTitle{
+font-style: italic;
+font-weight: bold;
+font-size: 200%;
+font-family: Arial, Helvetica, sans-serif; 
+text-align: center;
+color: white;
+}
+
+ #aboutCloseButton{
+    background-color: rgb(0, 0, 0);
+    color: white;
+    font-family: Arial, Helvetica, sans-serif; 
+    font-size: 85%;
+	text-align: center;
+    border: white 1px solid;
+    border-radius: 5px;
+    cursor: pointer;
+    padding-top: 1px;
+    margin-left: 85%;
+  }
+
+#aboutCloseButton:hover {
+    background-color:rgb(60, 60, 60);
+  }
+  
+#aboutContents{
+padding-left: 5%;
+padding-right: 5%;
+margin-top: 5%;
+font-family: Arial, Helvetica, sans-serif;
+color: white;
+}
+
+/*=========================SIGN UP PROMPT BOX===============================*/
+#signupModal{
+  display: none;
+  position: fixed; 
+  z-index: 1;
+  padding-top: 100px;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  overflow: auto;
+  background-color: rgba(0, 0, 0, 0.4);
+}
+
+#signupFormContainer{
+ margin-left: auto;
+ margin-right: auto;
+ width: 400px;
+ height: fit-content;
+ background-color: rgba(0, 0, 0, .5);
+ border: 5px double rgb(80, 38, 22);
+ border-radius:7px;
+ padding: .75%;
+}
+
+#signupFormSecondaryContainer{
+background-color: rgba(107, 142, 35, .75);
+margin-left: auto;
+margin-right: auto;
+padding: 2%;
+}
+
+#signupFormTitle{
+font-style: italic;
+font-weight: bold;
+font-size: 200%;
+font-family: Arial, Helvetica, sans-serif; 
+text-align: center;
+color: white;
+}
+
+.formInput{
+    border-radius: 5px;
+    border: 1px solid black;
+    margin-bottom: 3%;
+}
+
+#signupBtnsGrid{
+display: grid;
+grid-template-columns: 30% 30%;
+grid-gap: 0% 5%;
+width: 200px;
+margin-left: 66%;
+}
+
+#signupSubmitBtn{
+    background-color: rgb(0, 0, 0);
+    color: white;
+    border: white 1px solid;
+    border-radius: 5px;
+    cursor: pointer;
+  }
+  
+ #signupCloseButton{
+    background-color: rgb(0, 0, 0);
+    color: white;
+    font-family: Arial, Helvetica, sans-serif; 
+    font-size: 85%;
+	text-align: center;
+    border: white 1px solid;
+    border-radius: 5px;
+    cursor: pointer;
+    padding-top: 1px;
+  }
+
+#signupSubmitBtn:hover, #signupCloseButton:hover {
+    background-color:rgb(60, 60, 60);
+  }
+  
+#signupInputContents{
+margin-left: 17.5%;
+margin-top: 5%;
+}
+
+.signupFormLabel{
+font-family: Arial, Helvetica, sans-serif;
+color: orange;
+font-weight: bold;  
+}
+
+#signupPasswordBlock{
+margin-left: .5%;
+}
+
+/*=========================LOGIN PROMPT BOX===============================*/
+#loginModal{
+  display: none;
+  position: fixed; 
+  z-index: 1;
+  padding-top: 150px;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  overflow: auto;
+  background-color: rgba(0, 0, 0, 0.4);
+}
+
+#loginFormContainer{
+ margin-left: auto;
+ margin-right: auto;
+ width: 400px;
+ height: fit-content;
+ background-color: rgba(0, 0, 0, .5);
+ border: 5px double rgb(80, 38, 22);
+ border-radius:7px;
+ padding: .75%;
+}
+
+#loginFormSecondaryContainer{
+background-color: rgba(107, 142, 35, .75);
+margin-left: auto;
+margin-right: auto;
+padding: 2%;
+}
+
+#loginFormTitle{
+font-style: italic;
+font-weight: bold;
+font-size: 200%;
+font-family: Arial, Helvetica, sans-serif; 
+text-align: center;
+color: white;
+}
+
+.formInput{
+    border-radius: 5px;
+    border: 1px solid black;
+    margin-bottom: 3%;
+}
+
+#loginBtnsGrid{
+display: grid;
+grid-template-columns: 30% 30%;
+grid-gap: 0% 5%;
+width: 200px;
+margin-left: 66%;
+}
+
+#loginSubmitBtn{
+    background-color: rgb(0, 0, 0);
+    color: white;
+    border: white 1px solid;
+    border-radius: 5px;
+    cursor: pointer;
+    /*margin-left: 85%;*/
+  }
+  
+ #loginCloseButton{
+    background-color: rgb(0, 0, 0);
+    color: white;
+    font-family: Arial, Helvetica, sans-serif; 
+    font-size: 85%;
+	text-align: center;
+    border: white 1px solid;
+    border-radius: 5px;
+    cursor: pointer;
+    padding-top: 1px;
+    /*margin-left: 85%;*/
+  }
+
+#loginSubmitBtn:hover, #loginCloseButton:hover {
+    background-color:rgb(60, 60, 60);
+  }
+  
+#loginInputContents{
+margin-left: 17.5%;
+margin-top: 5%;
+}
+
+.loginFormLabel{
+font-family: Arial, Helvetica, sans-serif;
+color: orange;
+font-weight: bold; 
+}
+
+#loginPasswordBlock{
+margin-left: .5%;
+}
+}/*=========end of MEDIA:MAX-WIDTH 1270 PX=========*/
+</style>
 
 </head>
 
