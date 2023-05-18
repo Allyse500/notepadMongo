@@ -3,6 +3,7 @@ const cors = require('cors');
 const mongoose = require('mongoose');
 const morgan = require('morgan');
 const session = require('express-session');
+const flash = require('connect-flash');
 const MongoDBStore = require('connect-mongodb-session')(session);
 const bcrypt = require('bcrypt');
 const multer = require('multer');
@@ -54,11 +55,17 @@ var store = new MongoDBStore({
     store: store
 }))
 
+app.use(flash());
 
 //routes to user router documents, only works for direct submissions to database (can't use frontEnd form)
 const usersRouter = require('./routes/users');
 
 app.use('/users', usersRouter);
+
+//declare root as index.ejs page
+app.get("/", (req, res) =>{
+    res.render("index.ejs", {message: req.flash("message"), messageTitle: req.session.messageTitle});
+});
 
 //authentication function variable=========================================
 const isAuth = (req, res, next) => {
@@ -66,6 +73,8 @@ const isAuth = (req, res, next) => {
         next()
     }
     else{//direct to root route
+        req.flash("message", "");
+        req.session.messageTitle = "Welcome back!";
         res.redirect("/");
         console.log("logged in: " + req.session.isAuth);
     }
@@ -86,6 +95,8 @@ app.post("/sign_up", async (req,res) => {
 
     if (user){//if username already exists
         console.log("user already exists.");
+        req.flash("message", "User already exists. Please choose a differnt username or log in.");
+        req.session.messageTitle = "Oops...";
         return res.redirect("/");//rediredirect to home page
     }
     else{//if username does not yet exist, prepare new user
@@ -97,6 +108,8 @@ app.post("/sign_up", async (req,res) => {
         })
 
         await user.save();//save new user to DB
+        req.flash("message", "Please submit credentials to log in.");
+        req.session.messageTitle = `Welcome ${username}!`;
         res.redirect('/');//redirect to root page***change to redirect to home/landing page
     }
 })
@@ -111,6 +124,8 @@ app.post("/login", async (req,res)=>{
 
     if (!user){//if the user does not exsist, return to the home page
         console.log("not a user");
+        req.flash("message", "User does not exist. Please check and re-enter username and password or create an account to log in.");
+        req.session.messageTitle = "Oops...";
         return res.redirect("/");
     }
 
@@ -118,6 +133,8 @@ app.post("/login", async (req,res)=>{
 
     if(!isMatch){//if the password doesn't match, return user to home page
         console.log("not matched");
+        req.flash("message", "Username or password incorrect. Please check and re-enter username and password to log in.");
+        req.session.messageTitle = "Oops...";
         return res.redirect("/");
     }
     req.session.isAuth = true;

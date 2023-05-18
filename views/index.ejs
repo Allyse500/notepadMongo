@@ -3,8 +3,6 @@
 <head>
 
     <title>Journal</title>
-    <link rel="stylesheet" href="index.css">
-    <!-- <script src="index.js"></script> -->
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <style>
 #bodyID {
@@ -15,7 +13,7 @@
     margin: 0;
     overflow-x: hidden;
   }
-      /* =================SCROLL BAR BEGIN========================== */
+/* =================SCROLL BAR BEGIN========================== */
   ::-webkit-scrollbar {
     width: 15px;
   }
@@ -39,83 +37,6 @@
     box-shadow: inset 0 0 5px grey;
   }
   /* ==================SCROLL BAR END========================= */
-/* ==================LOGIN & SIGN UP CONTAINERS=============== */
-/* #loginContainer{
-    border: 1px solid rgb(0, 0, 0);
-    border-radius: 10px;
-    height: 200px;
-    width: 400px;
-    margin-left: auto;
-    margin-right: auto;
-    margin-top: 15%;
-    display: none;
-    } */
-    
-    /* #signUpContainer{
-    border: 1px solid rgb(0, 0, 0);
-    border-radius: 10px;
-    height: 200px;
-    width: 400px;
-    margin-left: auto;
-    margin-right: auto;
-    margin-top: 15%;
-    display: none;
-    } */
-    
-    /* #loginTitle, #signUpTitle{
-    text-align: center;
-    font-size: 150%;
-    font-weight: bold;
-    margin-top: 1%;
-    } 
-    
-    #login, #signUp{
-    margin-left: 20%;
-    margin-top: 10%;
-    }
-    
-    #submitbtn, #submitbtn0{
-    border: 1px solid rgb(0, 0, 0);
-    border-radius: 15px;
-    padding: 1%;
-    width: fit-content;
-    float: right;
-    margin-right: 2%;
-    margin-top: 7%;
-    cursor: pointer;
-    }
-    
-    #username,#password, #newUsername, #newPassword{
-    border-radius: 4px;
-    }
-    
-    #signupbtn {
-    border: 1px solid rgb(0, 0, 0);
-    border-radius: 15px;
-    padding: 1%;
-    width: fit-content;
-    margin-top: -7%;
-    transform: translate(560%,16%);
-    cursor: pointer;
-    }
-    
-    #loginbtn {
-    border: 1px solid rgb(0, 0, 0);
-    border-radius: 15px;
-    padding: 1%;
-    width: fit-content;
-    margin-top: -7%;
-    transform: translate(710%,16%);
-    cursor: pointer;
-    }
-    
-    #signUpTextResponce, #loginTextResponce{
-    text-align:center;
-    transform: translate(-10%,200%);
-    margin-bottom: -6%;
-    display: none;
-    }*/
-
 /* ===================NAVBAR=================================== */
 #navbar{
 margin: 0;
@@ -165,10 +86,6 @@ padding-top: 1%;
     background-color: rgb(60, 60, 60);
 }
 
-/* #aboutBtn{
-    transform: translateX(25%);
-} */
-
 #searchLabel{
     color: white;
     font-size: 140%;
@@ -191,6 +108,73 @@ margin-left: 30%;
 display: block;
 -webkit-text-stroke: 1px rgb(255, 255, 255);
 }
+
+/*===========================MESSAGE PROMPT===============================*/
+#messageModal{
+    display: block;
+    position: fixed; 
+    z-index: 1;
+    padding-top: 100px;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    background-color: rgba(0, 0, 0, 0.4);
+}
+
+#messageContainer{
+    margin-left: auto;
+    margin-right: auto;
+    width: 400px;
+    height: fit-content;
+    background-color: rgba(0, 0, 0, .5);
+    border: 5px double rgb(80, 38, 22);
+    border-radius:7px;
+    padding: .75%; 
+}
+
+#messageSecondaryContainer{
+    background-color: rgba(107, 142, 35, .75);
+    margin-left: auto;
+    margin-right: auto;
+    padding: 2%;
+}
+
+#messageTitle{
+    font-style: italic;
+    font-weight: bold;
+    font-size: 200%;
+    font-family: Arial, Helvetica, sans-serif; 
+    text-align: center;
+    color: white; 
+}
+
+#mainPageMessage{
+    padding-left: 5%;
+    padding-right: 5%;
+    margin-top: 5%;
+    font-family: Arial, Helvetica, sans-serif;
+    color: white;
+}
+
+#messageModalCloseBtn{
+    background-color: rgb(0, 0, 0);
+    color: white;
+    font-family: Arial, Helvetica, sans-serif; 
+    font-size: 85%;
+	text-align: center;
+    border: white 1px solid;
+    border-radius: 5px;
+    cursor: pointer;
+    padding-top: 1px;
+    margin-left: 85%;
+}
+
+#messageModalCloseBtn:hover{
+    background-color:rgb(60, 60, 60);
+}
+
 
 /*=========================ABOUT PROMPT BOX===============================*/
 #aboutModal{
@@ -413,7 +397,6 @@ margin-left: 66%;
     border: white 1px solid;
     border-radius: 5px;
     cursor: pointer;
-    /*margin-left: 85%;*/
   }
   
  #loginCloseButton{
@@ -426,7 +409,6 @@ margin-left: 66%;
     border-radius: 5px;
     cursor: pointer;
     padding-top: 1px;
-    /*margin-left: 85%;*/
   }
 
 #loginSubmitBtn:hover, #loginCloseButton:hover {
@@ -481,82 +463,6 @@ margin-left: .5%;
     box-shadow: inset 0 0 5px grey;
   }
   /* ==================SCROLL BAR END========================= */
-/* ==================LOGIN & SIGN UP CONTAINERS=============== */
-/* #loginContainer{
-    border: 1px solid rgb(0, 0, 0);
-    border-radius: 10px;
-    height: 200px;
-    width: 400px;
-    margin-left: auto;
-    margin-right: auto;
-    margin-top: 15%;
-    display: none;
-    } */
-    
-    /* #signUpContainer{
-    border: 1px solid rgb(0, 0, 0);
-    border-radius: 10px;
-    height: 200px;
-    width: 400px;
-    margin-left: auto;
-    margin-right: auto;
-    margin-top: 15%;
-    display: none;
-    } */
-    
-    /* #loginTitle, #signUpTitle{
-    text-align: center;
-    font-size: 150%;
-    font-weight: bold;
-    margin-top: 1%;
-    } 
-    
-    #login, #signUp{
-    margin-left: 20%;
-    margin-top: 10%;
-    }
-    
-    #submitbtn, #submitbtn0{
-    border: 1px solid rgb(0, 0, 0);
-    border-radius: 15px;
-    padding: 1%;
-    width: fit-content;
-    float: right;
-    margin-right: 2%;
-    margin-top: 7%;
-    cursor: pointer;
-    }
-    
-    #username,#password, #newUsername, #newPassword{
-    border-radius: 4px;
-    }
-    
-    #signupbtn {
-    border: 1px solid rgb(0, 0, 0);
-    border-radius: 15px;
-    padding: 1%;
-    width: fit-content;
-    margin-top: -7%;
-    transform: translate(560%,16%);
-    cursor: pointer;
-    }
-    
-    #loginbtn {
-    border: 1px solid rgb(0, 0, 0);
-    border-radius: 15px;
-    padding: 1%;
-    width: fit-content;
-    margin-top: -7%;
-    transform: translate(710%,16%);
-    cursor: pointer;
-    }
-    
-    #signUpTextResponce, #loginTextResponce{
-    text-align:center;
-    transform: translate(-10%,200%);
-    margin-bottom: -6%;
-    display: none;
-    }*/
 
 /* ===================NAVBAR=================================== */
 #navbar{
@@ -606,10 +512,6 @@ padding-top: 1%;
 .homeButtons:hover{
     background-color: rgb(60, 60, 60);
 }
-
-/* #aboutBtn{
-    transform: translateX(25%);
-} */
 
 #searchLabel{
     color: white;
@@ -855,7 +757,6 @@ margin-left: 66%;
     border: white 1px solid;
     border-radius: 5px;
     cursor: pointer;
-    /*margin-left: 85%;*/
   }
   
  #loginCloseButton{
@@ -868,7 +769,6 @@ margin-left: 66%;
     border-radius: 5px;
     cursor: pointer;
     padding-top: 1px;
-    /*margin-left: 85%;*/
   }
 
 #loginSubmitBtn:hover, #loginCloseButton:hover {
@@ -907,6 +807,20 @@ margin-left: .5%;
 <div id="centralPageTitle">
     Journal
 </div>
+
+<!--=======================MESSAGE PROPMT===============================================-->
+<% if(message.length > 0) { %>
+    <div id="messageModal">
+        <div id="messageContainer">
+            <div id="messageSecondaryContainer">
+                <div id="messageTitle"><%=messageTitle%></div>
+                <div id="mainPageMessage"><%=message %></div>
+                <div id="messageModalCloseBtn" onclick="messageModalCloseBtn()">Close</div>
+            </div><!--end of id="messageSecondaryContainer"-->
+        </div><!--end of id="messageContainer"-->
+    </div><!--end of  id="messageModal"-->
+<% } %>
+
 <!--=======================ABOUT===============================================-->
 <div id="aboutModal">
     <div id="aboutContainer">
@@ -921,17 +835,6 @@ margin-left: .5%;
 </div><!--end of id="aboutModal"-->
 
 <!--========================SIGN UP PROMPT BOX===========================================-->        
-<!-- <div id="signUpContainer">
-    <div id= "signUpTitle">Sign Up</div><div id="loginbtn" onclick="loginForm()">Login</div>
-    <form id="signUp" action ="/sign_up" method="POST">
-    <label for ="newUsername">Username</label>
-    <input id ="newUsername" type="text" name="newUsername"><br><br>
-    <label for ="newPassword">Password</label>
-    <input id ="newPassword" type="password" name="newPassword"><br>
-    <div id="signUpTextResponce">Welcome!</div>
-    <button id="submitbtn0">Submit</button>
-    </form>
-    </div> -->
 
 <div id="signupModal">
     <div id="signupFormContainer">
@@ -956,17 +859,6 @@ margin-left: .5%;
 </div><!--end of id="signupModal"-->
 
 <!--========================LOGIN PROMPT BOX===========================================-->
-    <!-- <div id="loginContainer">
-        <div id= "loginTitle">Login</div><div id="signupbtn" onclick="signUpForm()">Sign up</div>
-        <form id="login" action="/login" method="POST">
-        <label for ="username">Username</label>
-        <input id ="username" name="username" type="text"><br><br>
-        <label for ="password">Password</label>
-        <input id ="password" name ="password" type="password"><br>
-        <div id="loginTextResponce">Welcome Back!</div>
-        <button id="submitbtn">Submit</button>
-        </form>
-        </div> -->
 
         <div id="loginModal">
             <div id="loginFormContainer">
@@ -991,63 +883,49 @@ margin-left: .5%;
         </div><!--end of id="loginModal"-->
 
 <!--========================ALL JAVASCRIPT FUNCTIONS BELOW===========================================-->
-        <script>
-        
+<script>
+//=======================MESSAGE PROMPT===============================================//
+//Close Message Prompt 
+function messageModalCloseBtn(){
+    document.getElementById("messageModal").style.display ="none";
+}//end of messageModalCloseBtn()
+
 //==========================ABOUT PROMPT BOX====================================//
 //display about prompt box-------------------------------------------------------------
 function aboutPromptBox(){
-document.getElementById("aboutModal").style.display ="block";
+    document.getElementById("aboutModal").style.display ="block";
 }//end of aboutPromptBox()
 
 //close about prompt box-------------------------------------------------------------
 function closeabout(){
-document.getElementById("aboutModal").style.display ="none";
+    document.getElementById("aboutModal").style.display ="none";
 }//end of closeabout()
 //==========================SIGN UP PROMPT BOX===================================//
 //display signup prompt box-------------------------------------------------------------
 function signupPromptBox(){
-document.getElementById("signupModal").style.display ="block";
-document.getElementById("newUsername").value ="";
-document.getElementById("newPassword").value ="";
+    document.getElementById("signupModal").style.display ="block";
+    document.getElementById("newUsername").value ="";
+    document.getElementById("newPassword").value ="";
 }//end of signupPromptBox()
 
 //close signup prompt box-------------------------------------------------------------
 function closesignup(){
-document.getElementById("signupModal").style.display ="none";
+    document.getElementById("signupModal").style.display ="none";
 }//end of closesignup()
 
 //===========================LOGIN PROMPT BOX====================================//
 //display login prompt box-------------------------------------------------------------
 function loginPromptBox(){
-document.getElementById("loginModal").style.display ="block";
-document.getElementById("username").value ="";
-document.getElementById("password").value ="";
+    document.getElementById("loginModal").style.display ="block";
+    document.getElementById("username").value ="";
+    document.getElementById("password").value ="";
 }//end of loginPromptBox()
 
 //close login prompt box-------------------------------------------------------------
 function closelogin(){
 document.getElementById("loginModal").style.display ="none";
 }//end of closelogin()
-
-
-        // function signUpForm(){
-        // document.getElementById("loginModal").style.display ="none";
-        // document.getElementById("signUpModal").style.display ="block";
-        // }
-        
-        // function loginForm(){
-        // document.getElementById("loginModal").style.display ="block";
-        // document.getElementById("signUpModal").style.display ="none";
-        // }
-        
-        /*function signUpTextResponce(){
-        document.getElementById("signUpTextResponce").style.display ="block";
-        }
-        
-        function loginTextResponce(){
-        document.getElementById("loginTextResponce").style.display ="block";
-        }*/
-        </script>
+</script>
 
 </body>
 </html>
