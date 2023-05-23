@@ -476,11 +476,12 @@ margin-left: .5%;
     height: 50px;
     background-color: rgb(0, 0, 0);
     padding-top: 1%;
+    display:grid;
 }
 
 #headerGrid{
     display: grid;
-    grid-template-columns: 50vw 50vw;
+    grid-template-columns: 1fr 1fr;
 }
 
 #buttonsGrid{
@@ -541,6 +542,8 @@ margin-left: .5%;
 
 .dropdown {
     display: inline-block;
+    justify-self:right;
+    width:fit-content;
     position:fixed;
     right:2vw;
     top: 1.5vh;
