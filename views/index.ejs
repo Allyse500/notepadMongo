@@ -90,6 +90,17 @@ padding-top: 1%;
   display:none;
 }
 
+.dropdownContent {
+    display: none;
+    min-width: 160px;
+    width: 160px;
+    height:fit-content;
+    overflow: auto;
+    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+    z-index: 2;
+    justify-self:right;
+}
+
 /*=========================CENTRAL PAGE TITLE=============================*/
 
 #centralPageTitle{
@@ -1073,7 +1084,7 @@ window.onclick = function(event) {
 //==========================ABOUT PROMPT BOX====================================//
 //display about prompt box-------------------------------------------------------------
 function aboutPromptBox(){
-    document.getElementById("aboutModal").style.display ="block";
+    document.getElementById("aboutModal").style.display ="flex";
 }//end of aboutPromptBox()
 
 //close about prompt box-------------------------------------------------------------
@@ -1083,7 +1094,7 @@ function closeabout(){
 //==========================SIGN UP PROMPT BOX===================================//
 //display signup prompt box-------------------------------------------------------------
 function signupPromptBox(){
-    document.getElementById("signupModal").style.display ="block";
+    document.getElementById("signupModal").style.display ="flex";
     document.getElementById("newUsername").value ="";
     document.getElementById("newPassword").value ="";
 }//end of signupPromptBox()
@@ -1096,7 +1107,7 @@ function closesignup(){
 //===========================LOGIN PROMPT BOX====================================//
 //display login prompt box-------------------------------------------------------------
 function loginPromptBox(){
-    document.getElementById("loginModal").style.display ="block";
+    document.getElementById("loginModal").style.display ="flex";
     document.getElementById("username").value ="";
     document.getElementById("password").value ="";
 }//end of loginPromptBox()
