@@ -86,14 +86,8 @@ padding-top: 1%;
     background-color: rgb(60, 60, 60);
 }
 
-#searchLabel{
-    color: white;
-    font-size: 140%;
-    font-family: Arial, Helvetica, sans-serif; 
-}
-
-#searchButton{
-    margin-left: 2%;
+.dropdown{
+  display:none;
 }
 
 /*=========================CENTRAL PAGE TITLE=============================*/
@@ -274,6 +268,10 @@ margin-right: auto;
 padding: 2%;
 }
 
+#signupForm{
+    display:grid;
+}
+
 #signupFormTitle{
 font-style: italic;
 font-weight: bold;
@@ -290,11 +288,11 @@ color: white;
 }
 
 #signupBtnsGrid{
-display: grid;
-grid-template-columns: 30% 30%;
-grid-gap: 0% 5%;
-width: 200px;
-margin-left: 66%;
+    display: grid;
+    grid-template-columns: 55px 55px;
+    grid-gap: 0% 5px;
+    width: fit-content;
+    justify-self:right;
 }
 
 #signupSubmitBtn{
@@ -315,6 +313,7 @@ margin-left: 66%;
     border-radius: 5px;
     cursor: pointer;
     padding-top: 1px;
+    width:55px;
   }
 
 #signupSubmitBtn:hover, #signupCloseButton:hover {
@@ -322,8 +321,8 @@ margin-left: 66%;
   }
   
 #signupInputContents{
-margin-left: 17.5%;
-margin-top: 5%;
+    justify-self:center;
+    margin-top: 5%;
 }
 
 .signupFormLabel{
@@ -361,6 +360,10 @@ margin-left: .5%;
  padding: .75%;
 }
 
+#loginForm{
+    display:grid;
+}
+
 #loginFormSecondaryContainer{
 background-color: rgba(107, 142, 35, .75);
 margin-left: auto;
@@ -384,11 +387,11 @@ color: white;
 }
 
 #loginBtnsGrid{
-display: grid;
-grid-template-columns: 30% 30%;
-grid-gap: 0% 5%;
-width: 200px;
-margin-left: 66%;
+    display: grid;
+    grid-template-columns: 55px 55px;
+    grid-gap: 0% 5px;
+    width: fit-content;
+    justify-self:right;
 }
 
 #loginSubmitBtn{
@@ -409,6 +412,7 @@ margin-left: 66%;
     border-radius: 5px;
     cursor: pointer;
     padding-top: 1px;
+    width:55px;
   }
 
 #loginSubmitBtn:hover, #loginCloseButton:hover {
@@ -416,8 +420,8 @@ margin-left: 66%;
   }
   
 #loginInputContents{
-margin-left: 17.5%;
-margin-top: 5%;
+    justify-self:center;
+    margin-top: 5%;
 }
 
 .loginFormLabel{
@@ -435,6 +439,8 @@ margin-left: .5%;
     #bodyID {
     background-image: url('notebook.jpg');
     background-size: 100vw 100vh;
+    height:100%;
+    width:100%;
     background-repeat: no-repeat; 
     margin: 0;
     overflow-x: hidden;
@@ -466,19 +472,19 @@ margin-left: .5%;
 
 /* ===================NAVBAR=================================== */
 #navbar{
-margin: 0;
-height: 50px;
-background-color: rgb(0, 0, 0);
-padding-top: 1%;
+    margin: 0;
+    height: 50px;
+    background-color: rgb(0, 0, 0);
+    padding-top: 1%;
 }
 
 #headerGrid{
     display: grid;
-    grid-template-columns: 50% 50%;
+    grid-template-columns: 50vw 50vw;
 }
 
 #buttonsGrid{
-    display: grid;
+    display: none;
     grid-template-columns: auto auto auto;
     position:fixed;
     right:15px;
@@ -493,6 +499,8 @@ padding-top: 1%;
     font-size: 200%;
     color: white;
     font-family: Arial, Helvetica, sans-serif;
+    position:fixed;
+    top: 1.5vh;
 }
 
 .homeButtons{
@@ -513,73 +521,124 @@ padding-top: 1%;
     background-color: rgb(60, 60, 60);
 }
 
-#searchLabel{
+.dropbtn {
     color: white;
-    font-size: 140%;
-    font-family: Arial, Helvetica, sans-serif; 
+    font-size: 5vh;
+    width: fit-content;
+    font-family: Arial, Helvetica, sans-serif;
+    border: solid white 1px;
+    cursor: pointer;
+    background-color: black;
+    border-radius: 10px;
+    padding-left:10px;
+    padding-right:10px;
 }
 
-#searchButton{
-    margin-left: 2%;
+.dropbtn:hover, .dropbtn:focus {
+    background-color: rgb(60, 60, 60);
+    color: white;
 }
+
+.dropdown {
+    display: inline-block;
+    position:fixed;
+    right:2vw;
+    top: 1.5vh;
+}
+
+.dropdownContent {
+    display: none;
+    position:fixed;
+    right:0;
+    min-width: 160px;
+    overflow: auto;
+    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+    z-index: 2;
+}
+
+.navOpt{
+    padding: 4%;
+    text-align:center;
+    font-family: Arial, Helvetica, sans-serif;
+    background: black;
+    color: white;
+    cursor: pointer;
+}
+
+.navOpt:hover{
+    background-color: rgb(60, 60, 60);
+}
+
+
+.show {display: block;}
 
 /*=========================CENTRAL PAGE TITLE=============================*/
 
 #centralPageTitle{
-font-size: 800%;
+font-size: 18vw;
 color: orange;
 font-weight: bold;
 font-style: italic;
 margin-top: 10%;
 margin-left: 0%;
 position:relative;
+z-index:-1;
 left:20vw;
 display: block;
 -webkit-text-stroke: 1px rgb(255, 255, 255);
 }
 
-/*=========================ABOUT PROMPT BOX===============================*/
-#aboutModal{
-  display: none;
-  position: fixed; 
-  z-index: 1;
-  padding-top: 100px;
-  left: 0;
-  top: 0;
-  width: 100%;
-  height: 100%;
-  overflow: auto;
-  background-color: rgba(0, 0, 0, 0.4);
+/*===========================MESSAGE PROMPT===============================*/
+#messageModal{
+    display: block;
+    position: fixed; 
+    z-index: 1;
+    padding-top: 15vh;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    background-color: rgba(0, 0, 0, 0.4);
 }
 
-#aboutContainer{
- margin-left: auto;
- margin-right: auto;
- width: 400px;
- height: fit-content;
- background-color: rgba(0, 0, 0, .5);
- border: 5px double rgb(80, 38, 22);
- border-radius:7px;
- padding: .75%;
+#messageContainer{
+    margin-left: auto;
+    margin-right: auto;
+    max-width: 400px;
+    width: 75vw;
+    height: fit-content;
+    background-color: rgba(0, 0, 0, .5);
+    border: 5px double rgb(80, 38, 22);
+    border-radius:7px;
+    padding: .75%; 
 }
 
-#aboutSecondaryContainer{
-background-color: rgba(107, 142, 35, .75);
-margin-left: auto;
-margin-right: auto;
-padding: 2%;
+#messageSecondaryContainer{
+    background-color: rgba(107, 142, 35, .75);
+    margin-left: auto;
+    margin-right: auto;
+    padding: 2%;
 }
 
-#aboutTitle{
-font-style: italic;
-font-weight: bold;
-font-size: 200%;
-font-family: Arial, Helvetica, sans-serif; 
-text-align: center;
-color: white;
+#messageTitle{
+    font-style: italic;
+    font-weight: bold;
+    font-size: 200%;
+    font-family: Arial, Helvetica, sans-serif; 
+    text-align: center;
+    color: white; 
 }
 
- #aboutCloseButton{
+#mainPageMessage{
+    padding-left: 5%;
+    padding-right: 5%;
+    margin-top: 5%;
+    font-family: Arial, Helvetica, sans-serif;
+    color: white;
+}
+
+#messageModalCloseBtn{
     background-color: rgb(0, 0, 0);
     color: white;
     font-family: Arial, Helvetica, sans-serif; 
@@ -590,18 +649,77 @@ color: white;
     cursor: pointer;
     padding-top: 1px;
     margin-left: 85%;
-  }
+}
+
+#messageModalCloseBtn:hover{
+    background-color:rgb(60, 60, 60);
+}
+
+/*=========================ABOUT PROMPT BOX===============================*/
+#aboutModal{
+  display: none;
+  position: fixed; 
+  z-index: 1;
+  padding-top: 15vh;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  overflow: auto;
+  background-color: rgba(0, 0, 0, 0.4);
+}
+
+#aboutContainer{
+    margin-left: auto;
+    margin-right: auto;
+    max-width: 400px;
+    width: 75vw;
+    height: fit-content;
+    background-color: rgba(0, 0, 0, .5);
+    border: 5px double rgb(80, 38, 22);
+    border-radius:7px;
+    padding: .75%;
+}
+
+#aboutSecondaryContainer{
+    background-color: rgba(107, 142, 35, .75);
+    margin-left: auto;
+    margin-right: auto;
+    padding: 2%;
+}
+
+#aboutTitle{
+    font-style: italic;
+    font-weight: bold;
+    font-size: 200%;
+    font-family: Arial, Helvetica, sans-serif; 
+    text-align: center;
+    color: white;
+}
+
+#aboutCloseButton{
+    background-color: rgb(0, 0, 0);
+    color: white;
+    font-family: Arial, Helvetica, sans-serif; 
+    font-size: 85%;
+    text-align: center;
+    border: white 1px solid;
+    border-radius: 5px;
+    cursor: pointer;
+    padding-top: 1px;
+    margin-left: 85%;
+}
 
 #aboutCloseButton:hover {
     background-color:rgb(60, 60, 60);
-  }
+}
   
 #aboutContents{
-padding-left: 5%;
-padding-right: 5%;
-margin-top: 5%;
-font-family: Arial, Helvetica, sans-serif;
-color: white;
+    padding-left: 5%;
+    padding-right: 5%;
+    margin-top: 5%;
+    font-family: Arial, Helvetica, sans-serif;
+    color: white;
 }
 
 /*=========================SIGN UP PROMPT BOX===============================*/
@@ -609,7 +727,7 @@ color: white;
   display: none;
   position: fixed; 
   z-index: 1;
-  padding-top: 100px;
+  padding-top: 15vh;
   left: 0;
   top: 0;
   width: 100%;
@@ -619,30 +737,35 @@ color: white;
 }
 
 #signupFormContainer{
- margin-left: auto;
- margin-right: auto;
- width: 400px;
- height: fit-content;
- background-color: rgba(0, 0, 0, .5);
- border: 5px double rgb(80, 38, 22);
- border-radius:7px;
- padding: .75%;
+    margin-left: auto;
+    margin-right: auto;
+    max-width: 400px;
+    width: 75vw;
+    height: fit-content;
+    background-color: rgba(0, 0, 0, .5);
+    border: 5px double rgb(80, 38, 22);
+    border-radius:7px;
+    padding: .75%;
 }
 
 #signupFormSecondaryContainer{
-background-color: rgba(107, 142, 35, .75);
-margin-left: auto;
-margin-right: auto;
-padding: 2%;
+    background-color: rgba(107, 142, 35, .75);
+    margin-left: initial;
+    margin-right: initial;
+    padding: 2%;
+}
+
+#signupForm{
+    display:grid;
 }
 
 #signupFormTitle{
-font-style: italic;
-font-weight: bold;
-font-size: 200%;
-font-family: Arial, Helvetica, sans-serif; 
-text-align: center;
-color: white;
+    font-style: italic;
+    font-weight: bold;
+    font-size: 200%;
+    font-family: Arial, Helvetica, sans-serif; 
+    text-align: center;
+    color: white;
 }
 
 .formInput{
@@ -652,11 +775,12 @@ color: white;
 }
 
 #signupBtnsGrid{
-display: grid;
-grid-template-columns: 30% 30%;
-grid-gap: 0% 5%;
-width: 200px;
-margin-left: 66%;
+    display: grid;
+    grid-template-columns: 55px 55px;
+    grid-gap: 0% 5px;
+    width: fit-content;
+    margin-left: initial;
+    justify-self:right;
 }
 
 #signupSubmitBtn{
@@ -665,7 +789,8 @@ margin-left: 66%;
     border: white 1px solid;
     border-radius: 5px;
     cursor: pointer;
-  }
+    width:fit-content;
+}
   
  #signupCloseButton{
     background-color: rgb(0, 0, 0);
@@ -677,25 +802,26 @@ margin-left: 66%;
     border-radius: 5px;
     cursor: pointer;
     padding-top: 1px;
-  }
+    width:55px;
+}
 
 #signupSubmitBtn:hover, #signupCloseButton:hover {
     background-color:rgb(60, 60, 60);
-  }
+}
   
 #signupInputContents{
-margin-left: 17.5%;
-margin-top: 5%;
+    justify-self:center;
+    margin-top: 5%;
 }
 
 .signupFormLabel{
-font-family: Arial, Helvetica, sans-serif;
-color: orange;
-font-weight: bold;  
+    font-family: Arial, Helvetica, sans-serif;
+    color: orange;
+    font-weight: bold;  
 }
 
 #signupPasswordBlock{
-margin-left: .5%;
+    margin-left: .5%;
 }
 
 /*=========================LOGIN PROMPT BOX===============================*/
@@ -703,7 +829,7 @@ margin-left: .5%;
   display: none;
   position: fixed; 
   z-index: 1;
-  padding-top: 150px;
+  padding-top: 15vh;
   left: 0;
   top: 0;
   width: 100%;
@@ -713,14 +839,19 @@ margin-left: .5%;
 }
 
 #loginFormContainer{
- margin-left: auto;
- margin-right: auto;
- width: 400px;
- height: fit-content;
- background-color: rgba(0, 0, 0, .5);
- border: 5px double rgb(80, 38, 22);
- border-radius:7px;
- padding: .75%;
+    margin-left: auto;
+    margin-right: auto;
+    max-width: 400px;
+    width: 75vw;
+    height: fit-content;
+    background-color: rgba(0, 0, 0, .5);
+    border: 5px double rgb(80, 38, 22);
+    border-radius:7px;
+    padding: .75%;
+}
+
+#loginForm{
+    display:grid;
 }
 
 #loginFormSecondaryContainer{
@@ -746,11 +877,12 @@ color: white;
 }
 
 #loginBtnsGrid{
-display: grid;
-grid-template-columns: 30% 30%;
-grid-gap: 0% 5%;
-width: 200px;
-margin-left: 66%;
+    display: grid;
+    grid-template-columns: 55px 55px;
+    grid-gap: 0% 5px;
+    width: fit-content;
+    margin-left: initial;
+    justify-self:right;
 }
 
 #loginSubmitBtn{
@@ -759,6 +891,7 @@ margin-left: 66%;
     border: white 1px solid;
     border-radius: 5px;
     cursor: pointer;
+    width:fit-content;
   }
   
  #loginCloseButton{
@@ -771,6 +904,7 @@ margin-left: 66%;
     border-radius: 5px;
     cursor: pointer;
     padding-top: 1px;
+    width:55px;
   }
 
 #loginSubmitBtn:hover, #loginCloseButton:hover {
@@ -778,8 +912,8 @@ margin-left: 66%;
   }
   
 #loginInputContents{
-margin-left: 17.5%;
-margin-top: 5%;
+    justify-self:center;
+    margin-top: 5%;
 }
 
 .loginFormLabel{
@@ -801,7 +935,20 @@ margin-left: .5%;
 <!--=======================NAVBAR==================================================-->
 <div id="navbar">
     <div id="headerGrid">
-        <div id="pageTitle">Home</div><div id="buttonsGrid"><div id="aboutBtn" class="homeButtons" onclick="aboutPromptBox()">About</div><div id="signUpBtn" class="homeButtons" onclick="signupPromptBox()">Sign Up</div><div id="loginBtn" class="homeButtons" onclick="loginPromptBox()">Login</div></div><!--end of id="buttonsGrid"-->
+        <div id="pageTitle">Home</div>
+        <div id="buttonsGrid">
+            <div id="aboutBtn" class="homeButtons" onclick="aboutPromptBox()">About</div>
+            <div id="signUpBtn" class="homeButtons" onclick="signupPromptBox()">Sign Up</div>
+            <div id="loginBtn" class="homeButtons" onclick="loginPromptBox()">Login</div>
+        </div><!--end of id="buttonsGrid"-->
+        <div class="dropdown">
+            <div onclick="dropDownNav()" class="dropbtn">&equiv;</div>
+            <div id="buttonsDropDown" class="dropdownContent">
+                <div id="aboutBtnDD" class="navOpt" onclick="aboutPromptBox()">About</div>
+                <div id="signUpBtnDD" class="navOpt" onclick="signupPromptBox()">Sign Up</div>
+                <div id="loginBtnDD" class="navOpt" onclick="loginPromptBox()">Log In</div>
+            </div><!--end of id="buttonsDropDown"-->
+        </div><!--end of class="dropdown"-->
     </div><!--end of id="headerGrid"-->
 </div><!--end of id="navbar"-->
 
@@ -892,6 +1039,25 @@ function messageModalCloseBtn(){
     document.getElementById("messageModal").style.display ="none";
 }//end of messageModalCloseBtn()
 
+//==========================NAVBAR===================================================//
+function dropDownNav() {
+  document.getElementById("buttonsDropDown").classList.toggle("show");
+}
+
+// Close the dropdown if the user clicks outside of it
+window.onclick = function(event) {
+  if (!event.target.matches('.dropbtn')) {
+    var dropdowns = document.getElementsByClassName("dropdownContent");
+    var i;
+    for (i = 0; i < dropdowns.length; i++) {
+      var openDropdown = dropdowns[i];
+      if (openDropdown.classList.contains('show')) {
+        openDropdown.classList.remove('show');
+      }
+    }
+  }
+}
+
 //==========================ABOUT PROMPT BOX====================================//
 //display about prompt box-------------------------------------------------------------
 function aboutPromptBox(){
@@ -925,7 +1091,7 @@ function loginPromptBox(){
 
 //close login prompt box-------------------------------------------------------------
 function closelogin(){
-document.getElementById("loginModal").style.display ="none";
+    document.getElementById("loginModal").style.display ="none";
 }//end of closelogin()
 </script>
 

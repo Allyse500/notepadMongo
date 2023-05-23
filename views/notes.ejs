@@ -159,11 +159,11 @@
             margin-left: auto;
             margin-right: auto;
             width: 250px;
-            height: 150px;
+            height: fit-content;
             border: 2px double white;
             background-color: rgba(107, 142, 35, .95);
             border-radius: 20px;
-            padding: 2%;
+            padding: 10px;
         }
         
         #optionsExit{
@@ -497,12 +497,28 @@
             background-repeat: no-repeat; 
             margin: 0;
             overflow-x: hidden;
+            display:grid;
         }
         }
 
         @media only screen and (orientation: portrait){
+            #notesBody{
+                justify-self:center;
+            }
+
             #notes{
-                max-width:30vw;
+                min-width:30vw;
+                width:200px;
+            }
+
+
+            .header{
+                display: grid;
+                grid-template-columns: auto auto auto;
+                grid-gap:0 10px;
+                position:relative;
+                justify-self:center;
+                width: fit-content;
             }
         }
     
