@@ -281,6 +281,9 @@ padding: 2%;
 
 #signupForm{
     display:grid;
+    display:flex;
+    justify-content:center;
+    align-content:center;
 }
 
 #signupFormTitle{
@@ -296,14 +299,17 @@ color: white;
     border-radius: 5px;
     border: 1px solid black;
     margin-bottom: 3%;
+    cursor:pointer;
 }
 
 #signupBtnsGrid{
-    display: grid;
+    /* display: grid;
     grid-template-columns: 55px 55px;
     grid-gap: 0% 5px;
     width: fit-content;
-    justify-self:right;
+    justify-self:right; */
+    display:flex;
+    justify-content:flex-end;
 }
 
 #signupSubmitBtn{
@@ -312,6 +318,8 @@ color: white;
     border: white 1px solid;
     border-radius: 5px;
     cursor: pointer;
+    width:55px;
+    margin-right:5px;
   }
   
  #signupCloseButton{
@@ -373,6 +381,9 @@ margin-left: .5%;
 
 #loginForm{
     display:grid;
+    display:flex;
+    justify-content:center;
+    align-content:center;
 }
 
 #loginFormSecondaryContainer{
@@ -395,14 +406,17 @@ color: white;
     border-radius: 5px;
     border: 1px solid black;
     margin-bottom: 3%;
+    cursor:pointer;
 }
 
 #loginBtnsGrid{
-    display: grid;
+    /* display: grid;
     grid-template-columns: 55px 55px;
     grid-gap: 0% 5px;
     width: fit-content;
-    justify-self:right;
+    justify-self:right; */
+    display:flex;
+    justify-content:flex-end;
 }
 
 #loginSubmitBtn{
@@ -411,6 +425,8 @@ color: white;
     border: white 1px solid;
     border-radius: 5px;
     cursor: pointer;
+    width:55px;
+    margin-right:5px;
   }
   
  #loginCloseButton{
@@ -783,6 +799,9 @@ display: block;
 
 #signupForm{
     display:grid;
+    display:flex;
+    justify-content:center;
+    align-content:center;
 }
 
 #signupFormTitle{
@@ -798,15 +817,18 @@ display: block;
     border-radius: 5px;
     border: 1px solid black;
     margin-bottom: 3%;
+    cursor:pointer;
 }
 
 #signupBtnsGrid{
-    display: grid;
+    /* display: grid;
     grid-template-columns: 55px 55px;
     grid-gap: 0% 5px;
     width: fit-content;
     margin-left: initial;
-    justify-self:right;
+    justify-self:right; */
+    display:flex;
+    justify-content:flex-end;
 }
 
 #signupSubmitBtn{
@@ -878,6 +900,9 @@ display: block;
 
 #loginForm{
     display:grid;
+    display:flex;
+    justify-content:center;
+    align-content:center;
 }
 
 #loginFormSecondaryContainer{
@@ -903,15 +928,18 @@ color: white;
     border-radius: 5px;
     border: 1px solid black;
     margin-bottom: 3%;
+    cursor:pointer;
 }
 
 #loginBtnsGrid{
-    display: grid;
+    /* display: grid;
     grid-template-columns: 55px 55px;
     grid-gap: 0% 5px;
     width: fit-content;
     margin-left: initial;
-    justify-self:right;
+    justify-self:right; */
+    display:flex;
+    justify-content:flex-end;
 }
 
 #loginSubmitBtn{
@@ -1028,10 +1056,10 @@ margin-left: .5%;
                     </div><!--end of id="signupPasswordBlock"-->
                 </div><!--end of id="signupInputContents" -->
                 <br>
-                <div id="signupBtnsGrid">
-                    <button id="signupSubmitBtn">Submit</button><div id="signupCloseButton" onclick="closesignup()">Close</div>
-                </div><!--end of id="signupBtnsGrid"-->
             </form><!--end of id="signupForm"-->
+            <div id="signupBtnsGrid">
+                <button id="signupSubmitBtn" form="signupForm">Submit</button><div id="signupCloseButton" onclick="closesignup()">Close</div>
+            </div><!--end of id="signupBtnsGrid"-->
         </div><!--end of id="signupFormSecondaryContainer-->
     </div><!--end of id="signupFormContainer"-->
 </div><!--end of id="signupModal"-->
@@ -1052,10 +1080,10 @@ margin-left: .5%;
                             </div><!--end of id="loginPasswordBlock"-->
                         </div><!--end of id="loginInputContents" -->
                         <br>
-                        <div id="loginBtnsGrid">
-                            <button id="loginSubmitBtn">Submit</button><div id="loginCloseButton" onclick="closelogin()">Close</div>
-                        </div><!--end of id="loginBtnsGrid"-->
                     </form><!--end of id="loginForm"-->
+                    <div id="loginBtnsGrid">
+                        <button id="loginSubmitBtn">Submit</button><div id="loginCloseButton" onclick="closelogin()">Close</div>
+                    </div><!--end of id="loginBtnsGrid"-->
                 </div><!--end of id="loginFormSecondaryContainer-->
             </div><!--end of id="loginFormContainer"-->
         </div><!--end of id="loginModal"-->
